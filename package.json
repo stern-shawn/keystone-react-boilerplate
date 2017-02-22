@@ -12,6 +12,6 @@
     "npm": "1.3.x"
   },
   "scripts": {
-    "start": "web.js"
+    "start": "node web"
   }
 }
