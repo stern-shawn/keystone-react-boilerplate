@@ -37,7 +37,9 @@ exports = module.exports = function(app) {
   app.get('/api/post/:id/remove', keystone.middleware.api, routes.api.posts.remove);
 
   // Catch all other rotues and go to index for now
-  app.get('*', routes.views.index);
+  app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/views/index.html');
+  });
   // app.get('/blog/:category?', routes.views.blog);
   // app.get('/blog/post/:post', routes.views.post);
   // app.get('/gallery', routes.views.gallery);
