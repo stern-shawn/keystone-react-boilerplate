@@ -33,15 +33,19 @@ class Blog extends Component {
   }
 
   render() {
-    const posts = this.state.posts.length > 0 ? this.state.posts.map((post, index) =>
-      <li key={index}>
-        <h3>{post.title}</h3>
-        <section>
-          <blockquote dangerouslySetInnerHTML={{ __html: post.content.markdown.html }}>
-          </blockquote>
-        </section>
-      </li>
-    ) : null;
+    const posts = this.state.posts.length > 0 ? this.state.posts.reverse().map((post, index) => {
+      // Get a human-readable date format for post times
+      const d = new Date(post.publishedDate);
+      const published =  d.toLocaleString();
+
+      return (
+        <li key={index}>
+          <h3>{post.title}</h3>
+          <h4>Published on: {published}</h4>
+          <blockquote dangerouslySetInnerHTML={{ __html: post.content.markdown.html }} />
+        </li>
+      );
+    }) : null;
 
     return (
       <div>

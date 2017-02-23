@@ -12632,7 +12632,11 @@ var Blog = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var posts = this.state.posts.length > 0 ? this.state.posts.map(function (post, index) {
+      var posts = this.state.posts.length > 0 ? this.state.posts.reverse().map(function (post, index) {
+        // Get a human-readable date format for post times
+        var d = new Date(post.publishedDate);
+        var published = d.toLocaleString();
+
         return _react2.default.createElement(
           'li',
           { key: index },
@@ -12642,10 +12646,12 @@ var Blog = function (_Component) {
             post.title
           ),
           _react2.default.createElement(
-            'section',
+            'h4',
             null,
-            _react2.default.createElement('blockquote', { dangerouslySetInnerHTML: { __html: post.content.markdown.html } })
-          )
+            'Published on: ',
+            published
+          ),
+          _react2.default.createElement('blockquote', { dangerouslySetInnerHTML: { __html: post.content.markdown.html } })
         );
       }) : null;
 
