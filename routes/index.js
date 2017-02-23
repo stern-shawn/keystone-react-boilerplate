@@ -30,18 +30,13 @@ var routes = {
 
 // Bind Routes
 exports = module.exports = function(app) {
+  // API Endpoints
   app.get('/api/post/list', keystone.middleware.api, routes.api.posts.list);
-  app.all('/api/post/create', keystone.middleware.api, routes.api.posts.create);
   app.get('/api/post/:id', keystone.middleware.api, routes.api.posts.get);
-  app.all('/api/post/:id/update', keystone.middleware.api, routes.api.posts.update);
-  app.get('/api/post/:id/remove', keystone.middleware.api, routes.api.posts.remove);
+  // app.all('/api/post/create', keystone.middleware.api, routes.api.posts.create);
+  // app.all('/api/post/:id/update', keystone.middleware.api, routes.api.posts.update);
+  // app.get('/api/post/:id/remove', keystone.middleware.api, routes.api.posts.remove);
 
-  // Catch all other rotues and go to index for now
-  app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/views/index.html');
-  });
-  // app.get('/blog/:category?', routes.views.blog);
-  // app.get('/blog/post/:post', routes.views.post);
-  // app.get('/gallery', routes.views.gallery);
-  // app.all('/contact', routes.views.contact);
+  // Serve the front-end SPA for non-API requests
+  app.get('*', routes.views.index);
 }

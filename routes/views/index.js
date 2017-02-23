@@ -1,7 +1,4 @@
-var keystone = require('keystone');
-
 exports = module.exports = function(req, res) {
-  var view = new keystone.View(req, res);
-
-  view.render('index');
+  // Dispatch our react app's base index.html file
+  res.sendFile(__dirname + '/index.html');
 }
