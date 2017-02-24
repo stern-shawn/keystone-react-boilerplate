@@ -12459,8 +12459,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.css");
+		module.hot.accept("!!../node_modules/css-loader/index.js?modules&sourceMap&localIdentName=[local]___[hash:base64:5]!../node_modules/sass-loader/lib/loader.js!./index.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js?modules&sourceMap&localIdentName=[local]___[hash:base64:5]!../node_modules/sass-loader/lib/loader.js!./index.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -12492,18 +12492,20 @@ var _logo = __webpack_require__(136);
 
 var _logo2 = _interopRequireDefault(_logo);
 
-__webpack_require__(244);
+var _App = __webpack_require__(244);
+
+var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
   return _react2.default.createElement(
     'div',
-    { className: 'App' },
+    { className: _App2.default.app },
     _react2.default.createElement(
       'div',
-      { className: 'App-header' },
-      _react2.default.createElement('img', { src: _logo2.default, className: 'App-logo', alt: 'logo' }),
+      { className: _App2.default.appHeader },
+      _react2.default.createElement('img', { src: _logo2.default, className: _App2.default.appLogo, alt: 'logo' }),
       _react2.default.createElement(
         'h2',
         null,
@@ -12512,7 +12514,7 @@ var App = function App() {
     ),
     _react2.default.createElement(
       'p',
-      { className: 'App-intro' },
+      { className: _App2.default.appIntro },
       'To get started, edit ',
       _react2.default.createElement(
         'code',
@@ -12749,10 +12751,16 @@ exports = module.exports = __webpack_require__(73)();
 
 
 // module
-exports.push([module.i, ".App {\n  text-align: center; }\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px; }\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white; }\n\n.App-intro {\n  font-size: large; }\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg); }\n  to {\n    transform: rotate(360deg); } }\n", ""]);
+exports.push([module.i, ".app___3nDH3 {\n  text-align: center; }\n\n.appLogo___3omL3 {\n  animation: appLogoSpin___2V_LJ infinite 20s linear;\n  height: 80px; }\n\n.appHeader___1TVIP {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white; }\n\n.appIntro___33wIi {\n  font-size: large; }\n\n@keyframes appLogoSpin___2V_LJ {\n  from {\n    transform: rotate(0deg); }\n  to {\n    transform: rotate(360deg); } }\n", "", {"version":3,"sources":["/./client/App.css"],"names":[],"mappings":"AAAA;EACE,mBAAmB,EAAE;;AAEvB;EACE,mDAA2C;EAC3C,aAAa,EAAE;;AAEjB;EACE,uBAAuB;EACvB,cAAc;EACd,cAAc;EACd,aAAa,EAAE;;AAEjB;EACE,iBAAiB,EAAE;;AAErB;EACE;IACE,wBAAwB,EAAE;EAC5B;IACE,0BAA0B,EAAE,EAAE","file":"App.css","sourcesContent":[".app {\n  text-align: center; }\n\n.appLogo {\n  animation: appLogoSpin infinite 20s linear;\n  height: 80px; }\n\n.appHeader {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white; }\n\n.appIntro {\n  font-size: large; }\n\n@keyframes appLogoSpin {\n  from {\n    transform: rotate(0deg); }\n  to {\n    transform: rotate(360deg); } }\n"],"sourceRoot":"webpack://"}]);
 
 // exports
-
+exports.locals = {
+	"app": "app___3nDH3",
+	"appLogo": "appLogo___3omL3",
+	"appLogoSpin": "appLogoSpin___2V_LJ",
+	"appHeader": "appHeader___1TVIP",
+	"appIntro": "appIntro___33wIi"
+};
 
 /***/ }),
 /* 121 */
@@ -12763,7 +12771,7 @@ exports = module.exports = __webpack_require__(73)();
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif; }\n", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif; }\n", "", {"version":3,"sources":["/./client/index.css"],"names":[],"mappings":"AAAA;EACE,UAAU;EACV,WAAW;EACX,wBAAwB,EAAE","file":"index.css","sourcesContent":["body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif; }\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -27257,8 +27265,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./App.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./App.css");
+		module.hot.accept("!!../node_modules/css-loader/index.js?modules&sourceMap&localIdentName=[local]___[hash:base64:5]!../node_modules/sass-loader/lib/loader.js!./App.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js?modules&sourceMap&localIdentName=[local]___[hash:base64:5]!../node_modules/sass-loader/lib/loader.js!./App.css");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});

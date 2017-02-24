@@ -18,7 +18,7 @@ var config = {
       },
       {
         test: /\.(scss|css)$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"],
+        loaders: ["style-loader", "css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]", "sass-loader"],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
