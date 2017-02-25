@@ -37,7 +37,7 @@ module.exports = (options) => ({
       test: /\.scss$/,
       exclude: /node_modules/,
       loaders: [
-        'style-loader',
+        'style-loader?fixUrls',
         'css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]',
       ],
     },
