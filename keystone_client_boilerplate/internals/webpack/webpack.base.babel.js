@@ -14,7 +14,7 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
-      test: /\.js$/, // Transform all .js files required somewhere with Babel
+      test: /\.jsx?$/, // Transform all .js files required somewhere with Babel
       loader: 'babel-loader',
       exclude: /node_modules/,
       query: options.babelQuery,
@@ -27,13 +27,19 @@ module.exports = (options) => ({
       // So, no need for ExtractTextPlugin here.
       test: /\.css$/,
       include: /node_modules/,
-      loaders: ['style-loader', 'css-loader'],
+      loaders: [
+        'style-loader',
+        'css-loader',
+      ],
     },
     {
       // Becuase CSS Modules is a great concept
       test: /\.scss$/,
       exclude: /node_modules/,
-      loaders: ['style-loader', 'css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]'],
+      loaders: [
+        'style-loader?fixUrls',
+        'css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      ],
     },
     {
       test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -91,7 +97,10 @@ module.exports = (options) => ({
     new webpack.NamedModulesPlugin(),
   ]),
   resolve: {
-    modules: ['app', 'node_modules'],
+    modules: [
+      'app',
+      'node_modules',
+    ],
     extensions: [
       '.js',
       '.jsx',
