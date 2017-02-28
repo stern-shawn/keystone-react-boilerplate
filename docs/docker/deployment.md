@@ -7,22 +7,19 @@ sudo docker build -t keystone-standalone .
 
 ---
 
-# Execute
-In either case, we want to expose port 3000 (Keystone) as well as provide a local location for any MongoDB data (for backups sake or if we want to instantiate the instance with a pre existing dataset).
+# Setup
+In either case, we want to expose port 3000 (Keystone)
 
-The local data storage location can be created with the following command (sudo might be necessary). If you have an existing dataset, simply copy it here.
-
-```Shell
-mkdir -p /var/mongodb
-```
+## Run MongoDB Container
+docker run -p 27017:27017 -v /var/mongodb:/data/db --name mongo -d mongo
 
 ## Run in interactive mode with removal on exit
 ```Shell
-docker run -it --rm -p 3000:3000 -v /var/mongodb:/data/db --name keystone-standalone keystone-standalone
+docker run -it --rm -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
 ```
 ## Run as daemon
 ```Shell
-docker run -d -p 3000:3000 -v /var/mongodb:/data/db --name keystone-standalone keystone-standalone
+docker run -d -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
 ```
 
 ### Killing the daemon
