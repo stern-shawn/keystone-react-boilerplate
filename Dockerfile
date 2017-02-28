@@ -3,6 +3,7 @@
 FROM ubuntu:latest
 MAINTAINER Shawn W. Stern <stern.shawn@gmail.com>
 
+# Replace shell w/ bash, good practice and makes the NVM installation work
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Update sources and install dependencies
@@ -34,7 +35,9 @@ RUN git clone https://github.com/stern-shawn/keystone-react-boilerplate.git /key
     yarn && \
     yarn build && \
     cd .. && \
-    yarn
+    yarn && \
+    # Change the mongo connection to use docker hosts entry instead of default localhost
+    sed -i 's/localhost\/my-project/mongo:27017/g' server.js
 
 # Expose ourselves to the world
 ENV PORT 3000
