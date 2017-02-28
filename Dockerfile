@@ -10,8 +10,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    git \
-    libssl-dev
+    libssl-dev && \
+    apt-get clean
 
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 6.9.1
@@ -26,18 +26,21 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | b
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# Install yarn for a speed boost
-RUN npm install -g yarn
-
-# Clone and build our App
-RUN git clone https://github.com/stern-shawn/keystone-react-boilerplate.git /keystone && \
+# Clone and build our App. Clean up dependencies after prod build is complete.
+RUN npm install -g yarn && \
+    apt-get install -y git && \
+    git clone https://github.com/stern-shawn/keystone-react-boilerplate.git /keystone && \
     cd /keystone/keystone_client_boilerplate && \
     yarn && \
     yarn build && \
+    rm -rf node_modules && \
     cd .. && \
     yarn && \
     # Change the mongo connection to use docker hosts entry instead of default localhost
-    sed -i 's/localhost\/my-project/mongo:27017/g' server.js
+    sed -i 's/localhost\/my-project/mongo:27017/g' server.js && \
+    npm uninstall -g yarn && \
+    apt-get remove -y git && \
+    apt-get clean
 
 # Expose ourselves to the world
 ENV PORT 3000
