@@ -11,27 +11,27 @@ sudo docker build -t keystone-standalone .
 In either case, we want to expose port 3000 (Keystone)
 
 ## Run MongoDB Container
-docker run -p 27017:27017 -v /var/mongodb:/data/db --name mongo -d mongo
+sudo docker run -p 27017:27017 -v /var/mongodb:/data/db --name mongo -d mongo
 
 ## Run in interactive mode with removal on exit
 ```Shell
-docker run -it --rm -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
+sudo docker run -it --rm -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
 ```
 ## Run as daemon
 ```Shell
-docker run -d -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
+sudo docker run -d -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --name keystone-standalone keystone-standalone
 ```
 
 ### Killing the daemon
 ```Shell
-docker stop keystone-standalone
+sudo docker stop keystone-standalone
 ```
 
 ### Checking usage statistics, etc
 ```Shell
-docker stats
+sudo docker stats
 ```
 or
 ```Shell
-docker ps
+sudo docker ps
 ```
