@@ -6,22 +6,24 @@ MAINTAINER Shawn W. Stern <stern.shawn@gmail.com>
 # Replace shell w/ bash, good practice and makes the NVM installation work
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Update sources and install dependencies
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 6.9.1
+
+# Update sources and install Node environment
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     libssl-dev && \
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash && \
+    source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default && \
+    apt-get remove -y \
+    build-essential \
+    curl \
+    libssl-dev && \
     apt-get clean
-
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 6.9.1
-
-# Install NVM and get Node environment installed
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash \
-    && source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
