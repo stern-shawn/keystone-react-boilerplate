@@ -7,6 +7,8 @@
 
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
+// Needed polyfill for smoothscrolling (only supported by Firefox for now)
+import { polyfill as smoothScrollPolyfill } from 'smoothscroll-polyfill';
 
 // Import all the third party stuff
 import React from 'react';
@@ -44,6 +46,9 @@ import './global-styles';
 
 // Import routes
 import createRoutes from './routes';
+
+// Enable window.scrollTo() functionality
+smoothScrollPolyfill();
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)

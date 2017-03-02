@@ -234,6 +234,7 @@
     "redux-saga": "0.14.0",
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",
+    "smoothscroll-polyfill": "^0.3.4",
     "styled-components": "1.1.2",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.1"
@@ -278,6 +279,7 @@
     "lint-staged": "3.2.1",
     "ngrok": "2.2.4",
     "node-plop": "0.5.4",
+    "node-sass": "^4.5.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.5.2",
     "plop": "1.7.3",
@@ -285,6 +287,7 @@
     "react-addons-test-utils": "15.4.1",
     "redux-logger": "^2.8.1",
     "rimraf": "2.5.4",
+    "sass-loader": "^6.0.2",
     "shelljs": "0.7.5",
     "sinon": "2.0.0-pre",
     "style-loader": "github:stern-shawn/style-loader",

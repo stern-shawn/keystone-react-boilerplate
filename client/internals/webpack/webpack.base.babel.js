@@ -39,6 +39,7 @@ module.exports = (options) => ({
       loaders: [
         'style-loader?fixUrls',
         'css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]',
+        'sass-loader?outputStyle=expanded&sourceMap',
       ],
     },
     {
