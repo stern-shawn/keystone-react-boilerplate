@@ -1,0 +1,16 @@
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 100%;
+
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(768px + 16px * 2);
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+}
