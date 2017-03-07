@@ -10,6 +10,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+// Styles and layout
+import layout from 'styles/layout.scss';
+
+// Components
+import LandingHeader from 'components/LandingHeader';
 import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
@@ -49,7 +54,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             { name: 'description', content: 'A React.js Boilerplate application homepage' },
           ]}
         />
-        <div>
+        <LandingHeader />
+        <div id="content" className={layout.container}>
           <CenteredSection>
             <H2>
               <FormattedMessage {...messages.startProjectHeader} />

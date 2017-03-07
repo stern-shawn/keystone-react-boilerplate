@@ -1,7 +1,7 @@
 .blogHeader {
   background: url('./blogBg.jpg') no-repeat fixed center center / cover;
   position: relative;
-  height: calc(100vh - 68px);
+  height: calc(100vh - 3rem); // Updating offset to 3rem based on AppBar
   width: 100%;
   display: flex;
   flex-direction: column;

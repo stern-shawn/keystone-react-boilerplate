@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import classnames from 'classnames';
 
+import layout from 'styles/layout.scss';
+
 class Blog extends Component {
   constructor() {
     super();
@@ -48,7 +50,7 @@ class Blog extends Component {
     }) : null;
 
     return (
-      <div>
+      <div className={layout.container}>
         <h1>
           Blog Page
         </h1>
