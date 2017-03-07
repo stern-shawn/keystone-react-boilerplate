@@ -4,16 +4,17 @@ import React, { Component } from 'react';
 import layout from 'styles/layout.scss';
 
 class Blog extends Component {
-  constructor() {
-    super();
-    this.state = {
-      posts: [],
-    };
-    this.getPosts = this.getPosts.bind(this);
-    this.clearPosts = this.clearPosts.bind(this);
+  state = {
+    posts: [],
+  };
+
+  componentDidMount() {
+    console.log('Blog mounted');
+    this.getPosts();
+    console.log('Posts fetched');
   }
 
-  getPosts() {
+  getPosts = () => {
     // Fetch from KeystoneJS API, convert to JSON, then map to li's
     fetch('/api/post/list')
       .then((res) => res.json())
@@ -22,13 +23,13 @@ class Blog extends Component {
           posts: json.posts,
         });
       })
-      .catch(function (err) {
+      .catch((err) => {
         // Error :(
-        console.error("Error retrieving posts: " + err);
+        console.error(`Error retrieving posts: ${err}`);
       });
   }
 
-  clearPosts() {
+  clearPosts = () => {
     this.setState({
       posts: [],
     });
