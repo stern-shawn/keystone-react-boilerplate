@@ -1,0 +1,32 @@
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  // Fill full window height so that navbar overlay doesn't end prematurely
+  // and look ridiculous
+  height: 100vh;
+
+  // .contentWrapper {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   margin: 0 auto;
+  //   padding: 0 16px;
+  // }
+}
+
+.alertSidebar {
+  flex: 1;
+}
+
+// Ensure this panel fills all available space and can scroll vertically
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+// Offset content by the (reduced) height of the AppBar
+.contentPanel {
+  padding-top: 3rem;
+}

@@ -1,0 +1,100 @@
+.blogHeader {
+  background: url('./blogBg.jpg') no-repeat fixed center center / cover;
+  position: relative;
+  height: calc(100vh - 3rem); // Updating offset to 3rem based on AppBar
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: rgba(0,0,0,.5);
+  }
+
+  .headerContent {
+    z-index: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    -webkit-animation: fade-in-down 0.6s;
+    animation: fade-in-down 0.6s both;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+
+    h1 {
+      font-family: "Open Sans", sans-serif;
+      font-size: 5rem;
+      font-weight: 700;
+      margin: 10px 0 10px 0;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+
+    h2 {
+      font-family: "Merriweather", serif;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.5em;
+      margin: 0;
+      letter-spacing: 0.01rem;
+      color: rgba(255,255,255,0.8);
+    }
+  }
+
+  .contentArrow {
+    background: url('./icon-arrow-desktop.svg') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 44px;
+    left: 50%;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width: 44px;
+    bottom: 50px;
+    cursor: pointer;
+
+    -webkit-animation: bounce 4s 2s infinite;
+    animation: bounce 4s 2s infinite;
+
+  }
+}
+
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  20% {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  30% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+}

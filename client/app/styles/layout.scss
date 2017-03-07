@@ -1,0 +1,32 @@
+// Viewport limits, ie. xl breakpoint kicks in at or above 1200px width
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 576px;
+
+// Width limits
+$xll: 960px;
+$lgl: 720px;
+$mdl: 540px;
+
+.container {
+  max-width: 1140px;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  @media (max-width: $xl) {
+    max-width: $xll;
+  }
+
+  @media (max-width: $lg) {
+    max-width: $lgl;
+  }
+
+  @media (max-width: $md) {
+    max-width: $mdl;
+  }
+
+  @media (max-width: $sm) {
+    max-width: auto;
+  }
+}
