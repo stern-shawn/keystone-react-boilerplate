@@ -66,7 +66,7 @@ Blog.propTypes = {
   onUpdatePosts: PropTypes.func,
   posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
     PropTypes.object,
-    PropTypes.bool,
+    PropTypes.array,
   ]),
 };
 
