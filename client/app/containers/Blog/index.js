@@ -15,7 +15,7 @@ class Blog extends Component {
   }
 
   getPosts = () => {
-    // Fetch from KeystoneJS API, convert to JSON, then map to li's
+    // Fetch from KeystoneJS API, convert to JSON, then update the store
     fetch('/api/post/list')
       .then((res) => res.json())
       .then((json) => {
