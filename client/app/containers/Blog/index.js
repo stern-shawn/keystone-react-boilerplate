@@ -27,7 +27,7 @@ class Blog extends Component {
     } = this.props;
 
     // Create a li for each post using data from the redux store
-    const postList = posts && posts.length > 0 ? posts.reverse().map((post, index) => {
+    const postList = posts && posts.length > 0 ? posts.map((post, index) => {
       // Get a human-readable date format for post times
       const d = new Date(post.publishedDate);
       const published = d.toLocaleString();
