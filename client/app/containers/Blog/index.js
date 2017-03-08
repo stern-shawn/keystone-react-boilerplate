@@ -4,32 +4,30 @@ import { createStructuredSelector } from 'reselect';
 // import classnames from 'classnames';
 import layout from 'styles/layout.scss';
 
-import { setPosts } from './actions';
+import { getPosts } from './actions';
 import { makeSelectPosts } from './selectors';
 
 class Blog extends Component {
   componentDidMount() {
+    // Guess we have to destructure the less cool way...
+    const {
+      onGetPosts,
+    } = this.props;
+
+    // On mount, fetch posts from the API to populate the redux store
+    // The template below will populate itself based on the store's contents
     console.log('Blog mounted');
-    this.getPosts();
-    console.log('Posts fetched');
+    onGetPosts();
   }
 
-  getPosts = ({ onUpdatePosts }) => {
-    // Fetch from KeystoneJS API, convert to JSON, then update the store
-    fetch('/api/post/list')
-      .then((res) => res.json())
-      .then((json) => {
-        // Dispatch SET_POSTS action w/ json.posts as payload
-        onUpdatePosts(json.posts);
-      })
-      .catch((err) => {
-        // Error :(
-        console.error(`Error retrieving posts: ${err}`);
-      });
-  }
+  render() {
+    // Guess we have to destructure the less cool way...
+    const {
+      posts,
+    } = this.props;
 
-  render({ posts }) {
-    const postList = posts.length > 0 ? posts.reverse().map((post, index) => {
+    // Create a li for each post using data from the redux store
+    const postList = posts && posts.length > 0 ? posts.reverse().map((post, index) => {
       // Get a human-readable date format for post times
       const d = new Date(post.publishedDate);
       const published = d.toLocaleString();
@@ -49,9 +47,6 @@ class Blog extends Component {
           Blog Page
         </h1>
         <section>
-          <button onClick={this.getPosts}>Fetch All Posts</button>
-        </section>
-        <section>
           <h2>Recent Posts</h2>
           <ul>
             {postList}
@@ -63,7 +58,7 @@ class Blog extends Component {
 }
 
 Blog.propTypes = {
-  onUpdatePosts: PropTypes.func,
+  onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
     PropTypes.object,
     PropTypes.array,
@@ -71,7 +66,7 @@ Blog.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onUpdatePosts: (posts) => dispatch(setPosts(posts)),
+  onGetPosts: () => dispatch(getPosts()),
 });
 
 const mapStateToProps = createStructuredSelector({
