@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 // import classnames from 'classnames';
-
 import layout from 'styles/layout.scss';
 
-class Blog extends Component {
-  state = {
-    posts: [],
-  };
+import { setPosts } from './actions';
+import { makeSelectPosts } from './selectors';
 
+class Blog extends Component {
   componentDidMount() {
     console.log('Blog mounted');
     this.getPosts();
@@ -19,9 +19,8 @@ class Blog extends Component {
     fetch('/api/post/list')
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
-          posts: json.posts,
-        });
+        // Dispatch SET_POSTS action w/ json.posts as payload
+        this.props.onUpdatePosts(json.posts);
       })
       .catch((err) => {
         // Error :(
@@ -29,14 +28,12 @@ class Blog extends Component {
       });
   }
 
-  clearPosts = () => {
-    this.setState({
-      posts: [],
-    });
-  }
-
   render() {
-    const posts = this.state.posts.length > 0 ? this.state.posts.reverse().map((post, index) => {
+    const {
+      posts,
+    } = this.props;
+
+    const postList = posts.length > 0 ? posts.reverse().map((post, index) => {
       // Get a human-readable date format for post times
       const d = new Date(post.publishedDate);
       const published = d.toLocaleString();
@@ -56,13 +53,12 @@ class Blog extends Component {
           Blog Page
         </h1>
         <section>
-          <button onClick={this.clearPosts}>Clear Posts</button>
           <button onClick={this.getPosts}>Fetch All Posts</button>
         </section>
         <section>
           <h2>Recent Posts</h2>
           <ul>
-            {posts}
+            {postList}
           </ul>
         </section>
       </div>
@@ -70,4 +66,20 @@ class Blog extends Component {
   }
 }
 
-export default Blog;
+Blog.propTypes = {
+  onUpdatePosts: PropTypes.func,
+  posts: PropTypes.array,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onUpdatePosts: (posts) => dispatch(setPosts(posts)),
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  posts: makeSelectPosts(),
+});
+
+// Wrap the component to inject dispatch and state
+export default connect(mapStateToProps, mapDispatchToProps)(Blog);
