@@ -14,13 +14,13 @@ class Blog extends Component {
     console.log('Posts fetched');
   }
 
-  getPosts = () => {
+  getPosts = ({ onUpdatePosts }) => {
     // Fetch from KeystoneJS API, convert to JSON, then update the store
     fetch('/api/post/list')
       .then((res) => res.json())
       .then((json) => {
         // Dispatch SET_POSTS action w/ json.posts as payload
-        this.props.onUpdatePosts(json.posts);
+        onUpdatePosts(json.posts);
       })
       .catch((err) => {
         // Error :(
@@ -28,11 +28,7 @@ class Blog extends Component {
       });
   }
 
-  render() {
-    const {
-      posts,
-    } = this.props;
-
+  render({ posts }) {
     const postList = posts.length > 0 ? posts.reverse().map((post, index) => {
       // Get a human-readable date format for post times
       const d = new Date(post.publishedDate);
@@ -68,7 +64,10 @@ class Blog extends Component {
 
 Blog.propTypes = {
   onUpdatePosts: PropTypes.func,
-  posts: PropTypes.array,
+  posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
 };
 
 export function mapDispatchToProps(dispatch) {
