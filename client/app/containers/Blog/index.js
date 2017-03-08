@@ -70,11 +70,9 @@ Blog.propTypes = {
   ]),
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    onUpdatePosts: (posts) => dispatch(setPosts(posts)),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  onUpdatePosts: (posts) => dispatch(setPosts(posts)),
+});
 
 const mapStateToProps = createStructuredSelector({
   posts: makeSelectPosts(),
