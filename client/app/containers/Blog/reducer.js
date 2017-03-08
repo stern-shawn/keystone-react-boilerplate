@@ -16,7 +16,7 @@ const initialState = fromJS({
 });
 
 // Show posts in newest first order
-const makeChronological = (posts) => posts.reverse();
+// const makeChronological = (posts) => posts.reverse();
 
 function blogReducer(state = initialState, action) {
   switch (action.type) {
@@ -28,7 +28,7 @@ function blogReducer(state = initialState, action) {
       console.log('Posts retrieved successfully, adding to store');
       // Update the contents of the posts array
       return state
-        .set('posts', makeChronological(action.posts))
+        .set('posts', action.posts)
         .set('isLoading', false);
     case GET_POSTS_FAILED:
       console.log('Failed to get posts');

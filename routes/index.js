@@ -32,6 +32,7 @@ var routes = {
 exports = module.exports = function(app) {
   // API Endpoints
   app.get('/api/post/list', keystone.middleware.api, routes.api.posts.list);
+  app.get('/api/post/latestList', keystone.middleware.api, routes.api.posts.latestList);
   app.get('/api/post/:id', keystone.middleware.api, routes.api.posts.get);
   // app.all('/api/post/create', keystone.middleware.api, routes.api.posts.create);
   // app.all('/api/post/:id/update', keystone.middleware.api, routes.api.posts.update);

@@ -4,7 +4,7 @@ var async = require('async'),
 var Post = keystone.list('Post');
 
 /**
- * List Posts
+ * List Posts, standard order with oldest first
  */
 exports.list = function(req, res) {
   Post.model.find(function(err, items) {
@@ -12,7 +12,22 @@ exports.list = function(req, res) {
     if (err) return res.apiError('database error', err);
 
     res.apiResponse({
-      posts: items
+      posts: items,
+    });
+
+  });
+}
+
+/**
+ * List Posts, in blog format with newest first
+ */
+exports.latestList = function(req, res) {
+  Post.model.find(function(err, items) {
+
+    if (err) return res.apiError('database error', err);
+
+    res.apiResponse({
+      posts: items.reverse(),
     });
 
   });
@@ -28,7 +43,7 @@ exports.get = function(req, res) {
     if (!item) return res.apiError('not found');
 
     res.apiResponse({
-      post: item
+      post: item,
     });
 
   });
@@ -48,7 +63,7 @@ exports.create = function(req, res) {
     if (err) return res.apiError('error', err);
 
     res.apiResponse({
-      post: item
+      post: item,
     });
 
   });
@@ -70,7 +85,7 @@ exports.update = function(req, res) {
       if (err) return res.apiError('create error', err);
 
       res.apiResponse({
-        post: item
+        post: item,
       });
 
     });
@@ -91,7 +106,7 @@ exports.remove = function(req, res) {
       if (err) return res.apiError('database error', err);
 
       return res.apiResponse({
-        success: true
+        success: true,
       });
     });
 
