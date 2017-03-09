@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import layout from 'styles/layout.scss';
 import BlogCard from 'components/BlogComponents/BlogCard';
+import styles from './styles.scss';
 
 import { getPosts } from './actions';
 import { makeSelectPosts } from './selectors';
@@ -46,17 +47,11 @@ class Blog extends Component {
     }) : null;
 
     return (
-      <div className={layout.container}>
-        <h1>
-          Blog Page
-        </h1>
-        <section>
-          <h2>Recent Posts</h2>
-          <ul>
-            {postList}
-          </ul>
-        </section>
-      </div>
+      <section className={layout.container}>
+        <ul className={styles.postList}>
+          {postList}
+        </ul>
+      </section>
     );
   }
 }
