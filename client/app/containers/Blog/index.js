@@ -39,7 +39,7 @@ class Blog extends Component {
         <li key={index}>
           <h3>{post.title}</h3>
           <h4>Published on: {published}</h4>
-          {post.image && <img src={post.image.url} alt="placeholder" />}
+          {post.image && <img src={post.image.url} alt="Primary post image" />}
           <blockquote dangerouslySetInnerHTML={{ __html: post.content.extended.html || post.content.markdown.html }} />
         </li>
       );
