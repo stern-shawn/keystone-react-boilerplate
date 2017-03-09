@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-// import classnames from 'classnames';
+import classNames from 'classnames';
 
 import layout from 'styles/layout.scss';
 import BlogCard from 'components/BlogComponents/BlogCard';
@@ -46,10 +46,19 @@ class Blog extends Component {
       );
     }) : null;
 
+    const loaderIcon = classNames(
+      'fa',
+      'fa-refresh',
+      'fa-spin',
+      'fa-5x',
+      'fa-fw',
+      `${styles.loadIcon}`
+    );
+
     return (
-      <section className={layout.container}>
+      <section id="content" className={layout.container}>
         <ul className={styles.postList}>
-          {postList}
+          {postList || <i className={loaderIcon} />}
         </ul>
       </section>
     );

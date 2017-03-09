@@ -1,4 +1,8 @@
 .postList {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   list-style: none;
 
   li {
@@ -7,5 +11,9 @@
     &:first-child {
       margin-top: 0;
     }
+  }
+
+  .loadIcon {
+    align-self: center;
   }
 }
