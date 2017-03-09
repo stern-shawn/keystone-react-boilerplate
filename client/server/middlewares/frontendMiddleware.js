@@ -9,6 +9,8 @@ const addDevMiddlewares = (app, webpackConfig) => {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
+  const proxy = require('http-proxy-middleware');
+
   const compiler = webpack(webpackConfig);
   const middleware = webpackDevMiddleware(compiler, {
     noInfo: true,
@@ -19,6 +21,13 @@ const addDevMiddlewares = (app, webpackConfig) => {
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
+
+  // Add middleware for http proxying
+  // We want Keystone server running on port 3000 to provide the API endpoint,
+  // and having the app running on this separate express server lets us have
+  // all the awesome perks of hot reloading!
+  const apiProxy = proxy('/api', { target: 'http://localhost:3000' });
+  app.use('/api', apiProxy);
 
   // Since webpackDevMiddleware uses memory-fs internally to store build
   // artifacts, we use it instead
