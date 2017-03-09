@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv": "^4.0.0",
     "keystone": "^4.0.0-beta.3",
     "underscore": "latest"
   },
@@ -11,6 +12,10 @@
     "node": ">=6"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:prod": "cross-env NODE_ENV=production node server.js"
+  },
+  "devDependencies": {
+    "cross-env": "^3.2.3"
   }
 }
