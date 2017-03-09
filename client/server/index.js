@@ -24,7 +24,9 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
-const port = argv.port || process.env.PORT || 3000;
+// For dev environment, lets use port 3001 for the app since the Keystone API
+// already lives on port 3000
+const port = argv.port || process.env.PORT || 3001;
 
 // Start your app.
 app.listen(port, host, (err) => {
