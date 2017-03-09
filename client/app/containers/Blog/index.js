@@ -32,11 +32,15 @@ class Blog extends Component {
       const d = new Date(post.publishedDate);
       const published = d.toLocaleString();
 
+      // extended vs markdown is only a patch since my old example posts had
+      // markdown as a back-up. Should be primarily markdown going forward so
+      // this can be removed eventually
       return (
         <li key={index}>
           <h3>{post.title}</h3>
           <h4>Published on: {published}</h4>
-          <blockquote dangerouslySetInnerHTML={{ __html: post.content.markdown.html }} />
+          {post.image && <img src={post.image.url} alt="Primary post image" />}
+          <blockquote dangerouslySetInnerHTML={{ __html: post.content.extended.html || post.content.markdown.html }} />
         </li>
       );
     }) : null;

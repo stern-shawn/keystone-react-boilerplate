@@ -7,20 +7,53 @@ var keystone = require('keystone'),
  */
 
 var Post = new keystone.List('Post', {
-  map: { name: 'title' },
-  autokey: { path: 'slug', from: 'title', unique: true }
+  map: {
+    name: 'title',
+  },
+  autokey: {
+    path: 'slug',
+    from: 'title',
+    unique: true,
+  },
 });
 
 Post.add({
-  title: { type: String, required: true },
-  state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
-  author: { type: Types.Relationship, ref: 'User', index: true },
-  publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-  // image: { type: Types.CloudinaryImage },
+  title: {
+    type: String,
+    required: true,
+  },
+  state: {
+    type: Types.Select,
+    options: 'draft, published, archived',
+    default: 'draft',
+    index: true,
+  },
+  author: {
+    type: Types.Relationship,
+    ref: 'User',
+    index: true,
+  },
+  publishedDate: {
+    type: Types.Date,
+    index: true,
+    dependsOn: {
+      state: 'published',
+    },
+  },
+  image: {
+    type: Types.CloudinaryImage,
+    folder: 'keystoneBlog/posts/images/',
+    allowedTypes: 'image/jpeg,image/svg+xml,image/png',
+  },
   content: {
-    brief: { type: Types.Html, wysiwyg: true, height: 150 },
-    extended: { type: Types.Html, wysiwyg: true, height: 400 },
-    markdown: { type: Types.Markdown, height: 400 },
+    brief: {
+      type: Types.Markdown,
+      height: 150,
+    },
+    extended: {
+      type: Types.Markdown,
+      height: 400,
+    },
   },
   // categories: { type: Types.Relationship, ref: 'PostCategory', many: true }
 });

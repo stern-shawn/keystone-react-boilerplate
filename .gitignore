@@ -1,2 +1,12 @@
+# Dependency directory
 node_modules
+
+# Ignore build code
 public
+
+# Logs
+logs
+*.log
+
+# Ignore .env configuration files
+.env
