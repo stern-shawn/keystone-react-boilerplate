@@ -11,7 +11,13 @@ const makeSelectPosts = () => createSelector(
   (blogState) => blogState.get('posts')
 );
 
+const makeSelectLoading = () => createSelector(
+  selectBlog,
+  (blogState) => blogState.get('isLoading')
+);
+
 export {
   selectBlog,
   makeSelectPosts,
+  makeSelectLoading,
 };
