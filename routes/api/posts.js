@@ -36,7 +36,7 @@ exports.latestList = function(req, res) {
 /**
  * Get Post by ID
  */
-exports.get = function(req, res) {
+exports.getId = function(req, res) {
   Post.model.findById(req.params.id).exec(function(err, item) {
 
     if (err) return res.apiError('database error', err);
@@ -47,6 +47,24 @@ exports.get = function(req, res) {
     });
 
   });
+}
+
+/**
+ * Get Post by slug
+ */
+exports.getSlug = function(req, res) {
+  Post.model.findOne({
+        state: 'published',
+        slug: req.params.slug,
+      })
+      .exec(function (err, item) {
+        if (err) return res.apiError('database error', err);
+        if (!item) return res.apiError('not found');
+
+        res.apiResponse({
+          post: item,
+        });
+      });
 }
 
 
