@@ -6,31 +6,33 @@ var Post = keystone.list('Post');
 /**
  * List Posts, standard order with oldest first
  */
-exports.list = function(req, res) {
-  Post.model.find(function(err, items) {
-
+exports.fullList = function(req, res) {
+  Post.model
+  .find()
+  .where('state', 'published')
+  .exec(function(err, items) {
     if (err) return res.apiError('database error', err);
 
     res.apiResponse({
       posts: items,
     });
-
   });
 }
 
 /**
  * List Posts, in blog format with newest first
  */
-exports.latestList = function(req, res) {
-  Post.model.find(function(err, items) {
+exports.fullLatestList = function(req, res) {
+  Post.model
+    .find()
+    .where('state', 'published')
+    .exec(function(err, items) {
+      if (err) return res.apiError('database error', err);
 
-    if (err) return res.apiError('database error', err);
-
-    res.apiResponse({
-      posts: items.reverse(),
+      res.apiResponse({
+        posts: items.reverse(),
+      });
     });
-
-  });
 }
 
 /**
@@ -47,7 +49,6 @@ exports.getId = function(req, res) {
       res.apiResponse({
         post: item,
       });
-
     });
 }
 
