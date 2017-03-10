@@ -26,11 +26,12 @@ exports.fullLatestList = function(req, res) {
   Post.model
     .find()
     .where('state', 'published')
+    .sort('-publishedDate')
     .exec(function(err, items) {
       if (err) return res.apiError('database error', err);
 
       res.apiResponse({
-        posts: items.reverse(),
+        posts: items,
       });
     });
 }
