@@ -40,7 +40,7 @@ class Blog extends Component {
       // markdown as a back-up. Should be primarily markdown going forward so
       // this can be removed eventually
       return (
-        <li key={index}>
+        <li key={index} className={styles.dropCard}>
           <BlogCard post={post} date={published} />
         </li>
       );
