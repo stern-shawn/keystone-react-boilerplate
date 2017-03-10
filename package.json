@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "dotenv": "^4.0.0",
+    "he": "^1.1.1",
     "keystone": "^4.0.0-beta.3",
     "underscore": "latest"
   },
