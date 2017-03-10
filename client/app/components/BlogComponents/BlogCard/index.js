@@ -29,7 +29,7 @@ const BlogCard = ({ post, date }) => {
     <Card style={{ width: 'auto' }}>
       <CardTitle
         title={post.title}
-        subtitle={`Published on ${date}`}
+        subtitle={date !== 'Invalid Date' ? `Published on ${date}` : null}
       />
       <CardMedia
         aspectRatio="wide"
