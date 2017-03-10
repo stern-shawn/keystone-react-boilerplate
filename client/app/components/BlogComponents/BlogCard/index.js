@@ -11,7 +11,6 @@ const htmlToString = (html) => {
 };
 
 // Truncate string down to a maximum of 'limit' characters and add ellipsis if too long.
-// From there,
 const truncate = (string, limit) => {
   // Do an immediate return for short strings :)
   if (string.length <= limit) {
