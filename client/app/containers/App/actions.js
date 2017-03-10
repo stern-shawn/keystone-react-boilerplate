@@ -16,10 +16,22 @@
  */
 
 import {
+  TOGGLE_DRAWER,
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
 } from './constants';
+
+/**
+ * Toggle state of the navigation drawer
+ *
+ * @return {object} An action object with a type of TOGGLE_DRAWER
+ */
+export function toggleDrawer() {
+  return {
+    type: TOGGLE_DRAWER,
+  };
+}
 
 /**
  * Load the repositories, this action starts the request saga
