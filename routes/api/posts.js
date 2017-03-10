@@ -37,6 +37,27 @@ exports.fullLatestList = function(req, res) {
 }
 
 /**
+ * Grab a 'page' worth of posts, paginated
+ */
+exports.paginatedList = function(req, res) {
+  Post.paginate({
+    page: req.params.page || 1,
+    perPage: 10,
+    maxPages: 10
+  })
+  .where('state', 'published')
+  .sort('-publishedDate')
+  .populate('author categories')
+  .exec(function(err, items) {
+    if (err) return res.apiError('database error', err);
+
+    res.apiResponse({
+      posts: items,
+    });
+  });
+}
+
+/**
  * Get Post by ID
  */
 exports.getId = function(req, res) {

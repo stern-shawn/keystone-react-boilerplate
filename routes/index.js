@@ -42,6 +42,11 @@ exports = module.exports = function(app) {
     routes.api.posts.fullLatestList
   );
   app.get(
+    '/api/post/paginated/:page',
+    keystone.middleware.api,
+    routes.api.posts.paginatedList
+  );
+  app.get(
     '/api/post/id/:id',
     keystone.middleware.api,
     routes.api.posts.getId
