@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-// import classnames from 'classnames';
+import classNames from 'classnames';
+
 import layout from 'styles/layout.scss';
+import BlogCard from 'components/BlogComponents/BlogCard';
+import styles from './styles.scss';
 
 import { getPosts } from './actions';
 import { makeSelectPosts } from './selectors';
@@ -30,33 +33,34 @@ class Blog extends Component {
     const postList = posts && posts.length > 0 ? posts.map((post, index) => {
       // Get a human-readable date format for post times
       const d = new Date(post.publishedDate);
-      const published = d.toLocaleString();
+      // We only care about the date it was posted, use split to discard the time
+      const published = d.toLocaleString().split(',')[0];
 
       // extended vs markdown is only a patch since my old example posts had
       // markdown as a back-up. Should be primarily markdown going forward so
       // this can be removed eventually
       return (
-        <li key={index}>
-          <h3>{post.title}</h3>
-          <h4>Published on: {published}</h4>
-          {post.image && <img src={post.image.url} alt="Primary post image" />}
-          <blockquote dangerouslySetInnerHTML={{ __html: post.content.extended.html || post.content.markdown.html }} />
+        <li key={index} className={styles.dropCard}>
+          <BlogCard post={post} date={published} />
         </li>
       );
     }) : null;
 
+    const loaderIcon = classNames(
+      'fa',
+      'fa-refresh',
+      'fa-spin',
+      'fa-5x',
+      'fa-fw',
+      `${styles.loadIcon}`
+    );
+
     return (
-      <div className={layout.container}>
-        <h1>
-          Blog Page
-        </h1>
-        <section>
-          <h2>Recent Posts</h2>
-          <ul>
-            {postList}
-          </ul>
-        </section>
-      </div>
+      <section id="content" className={layout.container}>
+        <ul className={styles.postList}>
+          {postList || <i className={loaderIcon} />}
+        </ul>
+      </section>
     );
   }
 }
