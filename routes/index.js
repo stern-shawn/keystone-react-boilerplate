@@ -31,13 +31,26 @@ var routes = {
 // Bind Routes
 exports = module.exports = function(app) {
   // API Endpoints
-  app.get('/api/post/list', keystone.middleware.api, routes.api.posts.fullList);
-  app.get('/api/post/latestList', keystone.middleware.api, routes.api.posts.fullLatestList);
-  app.get('/api/post/id/:id', keystone.middleware.api, routes.api.posts.getId);
-  app.get('/api/post/slug/:slug', keystone.middleware.api, routes.api.posts.getSlug);
-  // app.all('/api/post/create', keystone.middleware.api, routes.api.posts.create);
-  // app.all('/api/post/:id/update', keystone.middleware.api, routes.api.posts.update);
-  // app.get('/api/post/:id/remove', keystone.middleware.api, routes.api.posts.remove);
+  app.get(
+    '/api/post/list',
+    keystone.middleware.api,
+    routes.api.posts.fullList
+  );
+  app.get(
+    '/api/post/latestList',
+    keystone.middleware.api,
+    routes.api.posts.fullLatestList
+  );
+  app.get(
+    '/api/post/id/:id',
+    keystone.middleware.api,
+    routes.api.posts.getId
+  );
+  app.get(
+    '/api/post/slug/:slug',
+    keystone.middleware.api,
+    routes.api.posts.getSlug
+  );
 
   // Serve the front-end SPA for non-API requests
   app.get('*', routes.views.index);
