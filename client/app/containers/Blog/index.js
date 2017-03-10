@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import classNames from 'classnames';
 
 import layout from 'styles/layout.scss';
 import BlogCard from 'components/BlogComponents/BlogCard';
+import LoadingIndicator from 'components/LoadingIndicator';
 import styles from './styles.scss';
 
 import { getPosts } from './actions';
-import { makeSelectPosts } from './selectors';
+import { makeSelectPosts, makeSelectLoading } from './selectors';
 
 class Blog extends Component {
   componentDidMount() {
@@ -27,6 +27,7 @@ class Blog extends Component {
     // Guess we have to destructure the less cool way...
     const {
       posts,
+      loading,
     } = this.props;
 
     // Create a li for each post using data from the redux store
@@ -46,19 +47,10 @@ class Blog extends Component {
       );
     }) : null;
 
-    const loaderIcon = classNames(
-      'fa',
-      'fa-refresh',
-      'fa-spin',
-      'fa-5x',
-      'fa-fw',
-      `${styles.loadIcon}`
-    );
-
     return (
       <section id="content" className={layout.container}>
         <ul className={styles.postList}>
-          {postList || <i className={loaderIcon} />}
+          {loading ? <LoadingIndicator /> : postList}
         </ul>
       </section>
     );
@@ -66,6 +58,7 @@ class Blog extends Component {
 }
 
 Blog.propTypes = {
+  loading: PropTypes.bool,
   onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
     PropTypes.object,
@@ -79,6 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = createStructuredSelector({
   posts: makeSelectPosts(),
+  loading: makeSelectLoading(),
 });
 
 // Wrap the component to inject dispatch and state
