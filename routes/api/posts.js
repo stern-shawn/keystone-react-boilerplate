@@ -37,34 +37,37 @@ exports.latestList = function(req, res) {
  * Get Post by ID
  */
 exports.getId = function(req, res) {
-  Post.model.findById(req.params.id).exec(function(err, item) {
+  Post.model
+    .findById(req.params.id)
+    .where('state', 'published')
+    .exec(function(err, item) {
+      if (err) return res.apiError('database error', err);
+      if (!item) return res.apiError('not found');
 
-    if (err) return res.apiError('database error', err);
-    if (!item) return res.apiError('not found');
+      res.apiResponse({
+        post: item,
+      });
 
-    res.apiResponse({
-      post: item,
     });
-
-  });
 }
 
 /**
  * Get Post by slug
  */
 exports.getSlug = function(req, res) {
-  Post.model.findOne({
-        state: 'published',
-        slug: req.params.slug,
-      })
-      .exec(function (err, item) {
-        if (err) return res.apiError('database error', err);
-        if (!item) return res.apiError('not found');
+  Post.model
+    .findOne({
+      state: 'published',
+      slug: req.params.slug,
+    })
+    .exec(function (err, item) {
+      if (err) return res.apiError('database error', err);
+      if (!item) return res.apiError('not found');
 
-        res.apiResponse({
-          post: item,
-        });
+      res.apiResponse({
+        post: item,
       });
+    });
 }
 
 
