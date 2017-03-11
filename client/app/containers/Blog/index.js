@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import layout from 'styles/layout.scss';
-import BlogCard from 'components/BlogComponents/BlogCard';
+import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
-import styles from './styles.scss';
 
 import {
   getPostBySlug,
@@ -48,21 +47,10 @@ class Blog extends Component {
       routeParams,
     } = this.props;
 
-    let BlogContainerContent;
-    if (routeParams) {
-      BlogContainerContent = focusedPost && <div className={styles.dropCard}><BlogPost post={focusedPost} /></div>;
-    } else {
-      // Create a li for each post using data from the redux store
-      BlogContainerContent = (
-        <ul className={styles.postList}>
-          {posts && posts.map((post, index) => (
-            <li key={index} className={styles.dropCard}>
-              <BlogCard post={post} />
-            </li>
-          ))}
-        </ul>
-    );
-    }
+    // Display a single blog post or a list of previews depending on location in the app
+    const BlogContainerContent = routeParams ?
+      focusedPost && <BlogPost post={focusedPost} /> :
+      posts && <BlogPreviewList posts={posts} />;
 
     return (
       <section id="content" className={layout.container}>
@@ -77,7 +65,7 @@ Blog.propTypes = {
   loading: PropTypes.bool,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
-  posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
+  posts: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
   ]),
