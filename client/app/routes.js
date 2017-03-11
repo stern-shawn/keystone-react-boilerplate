@@ -49,7 +49,7 @@ export default function createRoutes(store) {
       },
     },
     {
-      path: '/blog',
+      path: '/blog/:postSlug',
       name: 'blog',
       getComponent(nextState, cb) {
         import('containers/Blog')

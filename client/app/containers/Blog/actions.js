@@ -3,10 +3,24 @@
  */
 
 import {
+  GET_POST_BY_SLUG,
   GET_POSTS,
+  SET_POST,
   SET_POSTS,
   GET_POSTS_FAILED,
 } from './constants';
+
+/**
+ * Submit a request for one post by slug
+ *
+ * @return {object}    An action object with a type of GET_POST_BY_SLUG
+ */
+function getPostBySlug(slug) {
+  return {
+    type: GET_POST_BY_SLUG,
+    slug,
+  };
+}
 
 /**
  * Submit a request for all posts
@@ -16,6 +30,20 @@ import {
 function getPosts() {
   return {
     type: GET_POSTS,
+  };
+}
+
+/**
+ * Updates the currently focused post
+ *
+ * @param  {post} post Post object to be set
+ *
+ * @return {object}    An action object with a type of SET_POST
+ */
+function setPost(post) {
+  return {
+    type: SET_POST,
+    post,
   };
 }
 
@@ -45,7 +73,9 @@ function getPostsFailed() {
 }
 
 export {
+  getPostBySlug,
   getPosts,
+  setPost,
   setPosts,
   getPostsFailed,
 };

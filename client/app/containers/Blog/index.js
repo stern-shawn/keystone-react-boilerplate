@@ -3,74 +3,82 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import layout from 'styles/layout.scss';
-import BlogCard from 'components/BlogComponents/BlogCard';
+import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
+import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
-import styles from './styles.scss';
 
-import { getPosts } from './actions';
-import { makeSelectPosts, makeSelectLoading } from './selectors';
+import {
+  getPostBySlug,
+  getPosts,
+} from './actions';
+import {
+  makeSelectFocusedPost,
+  makeSelectPosts,
+  makeSelectLoading,
+} from './selectors';
 
 class Blog extends Component {
   componentDidMount() {
-    // Guess we have to destructure the less cool way...
     const {
+      onGetPost,
       onGetPosts,
+      routeParams,
     } = this.props;
 
-    // On mount, fetch posts from the API to populate the redux store
-    // The template below will populate itself based on the store's contents
-    console.log('Blog mounted');
-    onGetPosts();
+    // Load content based on if this container is being used to display
+    // all posts or a single post specified by the route pathing
+    if (routeParams) {
+      // Get and render the single post foxued by the user
+      console.log(`Retrieve blog post: ${routeParams.postSlug}`);
+      onGetPost(routeParams.postSlug);
+    } else {
+      // On mount, fetch posts from the API to populate the redux store
+      // The template below will populate itself based on the store's contents
+      console.log('Blog mounted, loading all posts');
+      onGetPosts();
+    }
   }
 
   render() {
-    // Guess we have to destructure the less cool way...
     const {
-      posts,
+      focusedPost,
       loading,
+      posts,
+      routeParams,
     } = this.props;
 
-    // Create a li for each post using data from the redux store
-    const postList = posts && posts.length > 0 ? posts.map((post, index) => {
-      // Get a human-readable date format for post times
-      const d = new Date(post.publishedDate);
-      // We only care about the date it was posted, use split to discard the time
-      const published = d.toLocaleString().split(',')[0];
-
-      // extended vs markdown is only a patch since my old example posts had
-      // markdown as a back-up. Should be primarily markdown going forward so
-      // this can be removed eventually
-      return (
-        <li key={index} className={styles.dropCard}>
-          <BlogCard post={post} date={published} />
-        </li>
-      );
-    }) : null;
+    // Display a single blog post or a list of previews depending on location in the app
+    const BlogContainerContent = routeParams ?
+      focusedPost && <BlogPost post={focusedPost} /> :
+      posts && <BlogPreviewList posts={posts} />;
 
     return (
       <section id="content" className={layout.container}>
-        <ul className={styles.postList}>
-          {loading ? <LoadingIndicator /> : postList}
-        </ul>
+        {loading ? <LoadingIndicator /> : BlogContainerContent}
       </section>
     );
   }
 }
 
 Blog.propTypes = {
+  focusedPost: PropTypes.object,
   loading: PropTypes.bool,
+  onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
-  posts: PropTypes.oneOfType([  // eslint-disable-line react/no-unused-prop-types
+  posts: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
   ]),
+  routeParams: PropTypes.object,
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  onGetPost: (slug) => dispatch(getPostBySlug(slug)),
   onGetPosts: () => dispatch(getPosts()),
 });
 
 const mapStateToProps = createStructuredSelector({
+  focusedPost: makeSelectFocusedPost(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
 });

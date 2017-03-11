@@ -2,7 +2,18 @@
 import React, { PropTypes } from 'react';
 import he from 'he';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import { Button } from 'react-toolbox/lib/button';
+import LinkButton from 'components/LinkedComponents/LinkButton';
+
+// Get a human-readable date format for post time
+const getDate = (date) => {
+  if (date === 'Invalid Date') {
+    return null;
+  }
+
+  const d = new Date(date);
+  // We only care about the date it was posted, use split to discard the time
+  return `Posted on ${d.toLocaleString().split(',')[0]}`;
+};
 
 // Helper function to strip tags from blog text for consistent display of previews
 const htmlToString = (html) => {
@@ -22,14 +33,15 @@ const truncate = (string, limit) => {
   return substring.substr(0, substring.lastIndexOf(' ')).concat('...');
 };
 
-const BlogCard = ({ post, date }) => {
+const BlogCard = ({ post }) => {
   const brief = htmlToString(post.content.brief.html || post.content.brief);
   const summary = truncate(htmlToString(post.content.extended.html || post.content.markdown.html), 250);
+  const date = getDate(post.publishedDate);
   return (
     <Card style={{ width: 'auto' }}>
       <CardTitle
         title={post.title}
-        subtitle={date !== 'Invalid Date' ? `Published on ${date}` : null}
+        subtitle={date}
       />
       <CardMedia
         aspectRatio="wide"
@@ -40,14 +52,13 @@ const BlogCard = ({ post, date }) => {
         <p dangerouslySetInnerHTML={{ __html: summary }} />
       </CardText>
       <CardActions>
-        <Button label="Read More..." />
+        <LinkButton label="Read More..." to={`/blog/${post.slug}`} />
       </CardActions>
     </Card>
   );
 };
 
 BlogCard.propTypes = {
-  date: PropTypes.string,
   post: PropTypes.object,
 };
 
