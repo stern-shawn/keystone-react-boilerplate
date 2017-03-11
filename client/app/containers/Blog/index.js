@@ -50,16 +50,14 @@ class Blog extends Component {
 
     let BlogContainerContent;
     if (routeParams) {
-      BlogContainerContent = focusedPost && <BlogPost post={focusedPost} />;
+      BlogContainerContent = focusedPost && <div className={styles.dropCard}><BlogPost post={focusedPost} /></div>;
     } else {
       // Create a li for each post using data from the redux store
-      BlogContainerContent = posts && posts.length > 0 ? posts.map((post, index) => {
-        return (
-          <li key={index} className={styles.dropCard}>
-            <BlogCard post={post} />
-          </li>
-        );
-      }) : null;
+      BlogContainerContent = posts && posts.map((post, index) => (
+        <li key={index} className={styles.dropCard}>
+          <BlogCard post={post} />
+        </li>
+      ));
     }
 
     return (

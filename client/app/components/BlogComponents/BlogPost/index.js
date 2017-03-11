@@ -19,16 +19,16 @@ const BlogPost = ({ post }) => {
   const date = getDate(post.publishedDate);
   return (
     <Card style={{ width: 'auto' }}>
-      <CardTitle
-        title={post.title}
-        subtitle={date}
-      />
       {post.image &&
       <CardMedia
         aspectRatio="wide"
         image={post.image.url}
       />
       }
+      <CardTitle
+        title={post.title}
+        subtitle={date}
+      />
       <CardText>
         <blockquote dangerouslySetInnerHTML={{ __html: brief }} />
         <section dangerouslySetInnerHTML={{ __html: postBody }} />
