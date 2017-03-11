@@ -32,7 +32,7 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN npm install -g yarn && \
     apt-get install -y git && \
     git clone https://github.com/stern-shawn/keystone-react-boilerplate.git /keystone && \
-    cd /keystone/keystone_client_boilerplate && \
+    cd /keystone/client && \
     yarn && \
     yarn build && \
     rm -rf node_modules && \
