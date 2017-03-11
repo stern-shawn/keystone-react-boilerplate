@@ -1,19 +1,8 @@
 // Element for displaying blog previews
 import React, { PropTypes } from 'react';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-
+import { getDate } from 'utils/postFormatter';
 import styles from './styles.scss';
-
-// Get a human-readable date format for post time
-const getDate = (date) => {
-  if (date === 'Invalid Date') {
-    return null;
-  }
-
-  const d = new Date(date);
-  // We only care about the date it was posted, use split to discard the time
-  return `Posted on ${d.toLocaleString().split(',')[0]}`;
-};
 
 const BlogPost = ({ post }) => {
   const brief = post.content.brief.html || post.content.brief;
