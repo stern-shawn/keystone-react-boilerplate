@@ -13,9 +13,9 @@ import {
 
 // The initial state of the App
 const initialState = fromJS({
-  isLoading: false,
-  focusedPost: {},
-  posts: [],
+  isLoading: true,
+  focusedPost: null,
+  posts: null,
 });
 
 // Show posts in newest first order
