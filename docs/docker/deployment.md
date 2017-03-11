@@ -27,7 +27,7 @@ sudo docker run -d -p 3000:3000 -v /var/mongodb:/data/db --link mongo:mongo --na
 ```Shell
 sudo docker stop keystone-standalone
 ```
-Use the same command with mongo as the arugment if you need to also stop the DB.
+Use the same command with mongo as the argument if you need to also stop the DB.
 
 ### Monitoring usage statistics, etc
 ```Shell
