@@ -11,7 +11,6 @@ const NavBar = () => (
   <div className={styles.bar}>
     <LinkButton label="Home" to="/" />
     <LinkButton label="Features" to="/features" />
-    <LinkButton label="Blog" to="/blog" />
   </div>
 );
 

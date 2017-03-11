@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import he from 'he';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import { Button } from 'react-toolbox/lib/button';
+import LinkButton from 'components/LinkedComponents/LinkButton';
 
 // Helper function to strip tags from blog text for consistent display of previews
 const htmlToString = (html) => {
@@ -40,7 +40,7 @@ const BlogCard = ({ post, date }) => {
         <p dangerouslySetInnerHTML={{ __html: summary }} />
       </CardText>
       <CardActions>
-        <Button label="Read More..." />
+        <LinkButton label="Read More..." to={`/blog/${post.slug}`} />
       </CardActions>
     </Card>
   );
