@@ -5,6 +5,7 @@
 import { fromJS } from 'immutable';
 
 import {
+  CLOSE_DRAWER,
   TOGGLE_DRAWER,
 } from './constants';
 
@@ -15,6 +16,9 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case CLOSE_DRAWER:
+      return state
+        .set('drawerActive', false);
     case TOGGLE_DRAWER:
       return state
         .set('drawerActive', !state.get('drawerActive'));

@@ -16,6 +16,7 @@
  */
 
 import {
+  CLOSE_DRAWER,
   TOGGLE_DRAWER,
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
@@ -30,6 +31,17 @@ import {
 export function toggleDrawer() {
   return {
     type: TOGGLE_DRAWER,
+  };
+}
+
+/**
+ * Directly close the navigation drawer
+ *
+ * @return {object} An action object with a type of CLOSE_DRAWER
+ */
+export function closeDrawer() {
+  return {
+    type: CLOSE_DRAWER,
   };
 }
 
