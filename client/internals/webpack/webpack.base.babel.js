@@ -34,7 +34,7 @@ module.exports = (options) => ({
     // },
     {
       // Becuase CSS Modules is a great concept
-      test: /\.s?css$/,
+      test: /\.s?[ac]?ss$/,
       // Excluding seems to break react-toolbox... Investigate further when time allows?
       // exclude: /node_modules/,
       loaders: [

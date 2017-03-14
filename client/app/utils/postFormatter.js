@@ -14,7 +14,7 @@ export const getDate = (date) => {
 
   const d = new Date(date);
   // We only care about the date it was posted, use split to discard the time
-  return `Posted on ${d.toLocaleString().split(',')[0]}`;
+  return `${d.toLocaleString().split(',')[0]}`;
 };
 
 /**
