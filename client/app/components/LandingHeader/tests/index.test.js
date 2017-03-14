@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Header from '../index';
+import LandingHeader from '../index';
 
-describe('<Header />', () => {
-  it('should render a div', () => {
+describe('<LandingHeader />', () => {
+  it('should render a header element', () => {
     const renderedComponent = shallow(
-      <Header />
+      <LandingHeader />
     );
-    expect(renderedComponent.find('div').length).toEqual(1);
+    expect(renderedComponent.find('header').length).toEqual(1);
   });
 });
