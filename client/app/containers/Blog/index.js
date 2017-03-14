@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import bulma from 'bulma'; // eslint-disable-line import/extensions
+import bulma from 'styles/bulma.scss';
 
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';

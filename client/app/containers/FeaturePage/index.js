@@ -6,7 +6,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
-import bulma from 'bulma'; // eslint-disable-line import/extensions
+import bulma from 'styles/bulma.scss';
 
 import H1 from 'components/H1';
 import messages from './messages';

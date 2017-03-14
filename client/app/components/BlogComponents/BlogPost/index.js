@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { getDate } from 'utils/postFormatter';
-import bulma from 'bulma'; // eslint-disable-line import/extensions
+import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 import theme from './theme.scss';
 
