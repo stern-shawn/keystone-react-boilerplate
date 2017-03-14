@@ -8,6 +8,7 @@ import {
   GET_POSTS,
   SET_POST,
   SET_POSTS,
+  SET_PAGINATED_POSTS,
   GET_POSTS_FAILED,
 } from './constants';
 
@@ -16,6 +17,8 @@ const initialState = fromJS({
   isLoading: true,
   focusedPost: null,
   posts: null,
+  currentPage: 1,
+  maxPages: 1,
 });
 
 // Show posts in newest first order
@@ -42,6 +45,14 @@ function blogReducer(state = initialState, action) {
       // Update the contents of the posts array
       return state
         .set('posts', action.posts)
+        .set('isLoading', false);
+    case SET_PAGINATED_POSTS:
+      console.log(`Posts from page ${action.paginatedData.currentPage} retrieved successfully, adding to store`);
+      // Update the contents of the posts array and pagination data
+      return state
+        .set('posts', action.paginatedData.results)
+        .set('currentPage', action.paginatedData.currentPage)
+        .set('maxPages', action.paginatedData.totalPages)
         .set('isLoading', false);
     case GET_POSTS_FAILED:
       console.log('Failed to get posts');

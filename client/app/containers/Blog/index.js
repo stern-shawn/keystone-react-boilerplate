@@ -9,17 +9,20 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import {
   getPostBySlug,
-  getPosts,
+  getPageOfPosts,
 } from './actions';
 import {
+  makeSelectCurrentPage,
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
+  makeSelectMaxPages,
 } from './selectors';
 
 class Blog extends Component {
   componentDidMount() {
     const {
+      currentPage,
       onGetPost,
       onGetPosts,
       routeParams,
@@ -35,7 +38,7 @@ class Blog extends Component {
       // On mount, fetch posts from the API to populate the redux store
       // The template below will populate itself based on the store's contents
       console.log('Blog mounted, loading all posts');
-      onGetPosts();
+      onGetPosts(currentPage);
     }
   }
 
@@ -61,6 +64,7 @@ class Blog extends Component {
 }
 
 Blog.propTypes = {
+  currentPage: PropTypes.number,
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
   onGetPost: PropTypes.func,
@@ -74,11 +78,13 @@ Blog.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onGetPost: (slug) => dispatch(getPostBySlug(slug)),
-  onGetPosts: () => dispatch(getPosts()),
+  onGetPosts: (page) => dispatch(getPageOfPosts(page)),
 });
 
 const mapStateToProps = createStructuredSelector({
+  currentPage: makeSelectCurrentPage(),
   focusedPost: makeSelectFocusedPost(),
+  maxPages: makeSelectMaxPages(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
 });

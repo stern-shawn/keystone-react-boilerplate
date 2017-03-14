@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import {
+  GET_PAGINATED_POSTS,
   GET_POSTS,
   GET_POST_BY_SLUG,
 } from './constants';
@@ -11,7 +12,12 @@ import {
 // Best practice to encapsulate fetch's Promise in an Observable
 const api = {
   fetchAllFullPosts: () => {
-    const request = fetch('/api/post/latestList')
+    const request = fetch('/api/post/paginated/')
+      .then((response) => response.json());
+    return Observable.from(request);
+  },
+  fetchPageOfPosts: (page) => {
+    const request = fetch(`/api/post/paginated/${page}`)
       .then((response) => response.json());
     return Observable.from(request);
   },
@@ -34,6 +40,13 @@ const getAllBlogPostsEpic = (action$) =>
         // })
     );
 
+const getPageOfPostsEpic = (action$) =>
+  action$.ofType(GET_PAGINATED_POSTS)
+    .mergeMap((action) =>
+      api.fetchPageOfPosts(action.page)
+        .map((json) => setPosts(json.posts.results))
+    );
+
 const getBlogPostBySlugEpic = (action$) =>
   action$.ofType(GET_POST_BY_SLUG)
     .mergeMap((action) =>
@@ -43,5 +56,6 @@ const getBlogPostBySlugEpic = (action$) =>
 
 export {
   getAllBlogPostsEpic,
+  getPageOfPostsEpic,
   getBlogPostBySlugEpic,
 };
