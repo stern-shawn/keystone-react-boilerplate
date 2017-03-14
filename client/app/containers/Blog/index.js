@@ -1,25 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import bulma from 'bulma'; // eslint-disable-line import/extensions
 
-import layout from 'styles/layout.scss';
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
 
 import {
   getPostBySlug,
-  getPosts,
+  getPageOfPosts,
 } from './actions';
 import {
+  makeSelectCurrentPage,
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
+  makeSelectMaxPages,
 } from './selectors';
 
 class Blog extends Component {
   componentDidMount() {
     const {
+      currentPage,
       onGetPost,
       onGetPosts,
       routeParams,
@@ -35,7 +38,7 @@ class Blog extends Component {
       // On mount, fetch posts from the API to populate the redux store
       // The template below will populate itself based on the store's contents
       console.log('Blog mounted, loading all posts');
-      onGetPosts();
+      onGetPosts(currentPage);
     }
   }
 
@@ -53,7 +56,7 @@ class Blog extends Component {
       posts && <BlogPreviewList posts={posts} />;
 
     return (
-      <section id="content" className={layout.container}>
+      <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
       </section>
     );
@@ -61,6 +64,7 @@ class Blog extends Component {
 }
 
 Blog.propTypes = {
+  currentPage: PropTypes.number,
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
   onGetPost: PropTypes.func,
@@ -74,11 +78,13 @@ Blog.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onGetPost: (slug) => dispatch(getPostBySlug(slug)),
-  onGetPosts: () => dispatch(getPosts()),
+  onGetPosts: (page) => dispatch(getPageOfPosts(page)),
 });
 
 const mapStateToProps = createStructuredSelector({
+  currentPage: makeSelectCurrentPage(),
   focusedPost: makeSelectFocusedPost(),
+  maxPages: makeSelectMaxPages(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
 });

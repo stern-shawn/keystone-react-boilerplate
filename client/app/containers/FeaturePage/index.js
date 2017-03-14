@@ -6,8 +6,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
-
-import layout from 'styles/layout.scss';
+import bulma from 'bulma'; // eslint-disable-line import/extensions
 
 import H1 from 'components/H1';
 import messages from './messages';
@@ -25,7 +24,7 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
 
   render() {
     return (
-      <div className={layout.container}>
+      <div className={bulma.container}>
         <Helmet
           title="Feature Page"
           meta={[

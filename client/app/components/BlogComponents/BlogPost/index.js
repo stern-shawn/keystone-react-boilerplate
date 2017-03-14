@@ -12,7 +12,7 @@ const BlogPost = ({ post }) => {
   const date = getDate(post.publishedDate);
 
   return (
-    <section className={`${styles.dropCard} ${bulma.content}`}>
+    <section className={`${styles.postArea} ${styles.dropCard} ${bulma.content}`}>
       <Card style={{ width: 'auto' }}>
         {post.image &&
           <CardMedia
