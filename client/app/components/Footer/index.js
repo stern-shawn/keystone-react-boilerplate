@@ -1,30 +1,21 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import bulma from 'bulma'; // eslint-disable-line import/extensions
 
-import A from 'components/A';
-import LocaleToggle from 'containers/LocaleToggle';
-import Wrapper from './Wrapper';
-import messages from './messages';
-
-function Footer() {
-  return (
-    <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
-      </section>
-    </Wrapper>
-  );
-}
+const Footer = () => (
+  <footer className={bulma.footer}>
+    <div className={bulma.container}>
+      <div className={`${bulma.content} ${bulma['has-text-centered']}`}>
+        <p>
+          <strong>KeystoneJS + React-Redux</strong> by <a href="https://github.com/stern-shawn">Shawn Stern</a>. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+        <p>
+          <a className={bulma.icon} href="https://github.com/stern-shawn/keystone-react-boilerplate">
+            <i className="fa fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;
