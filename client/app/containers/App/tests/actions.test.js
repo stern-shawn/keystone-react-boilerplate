@@ -1,51 +1,31 @@
 import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
+  CLOSE_DRAWER,
+  TOGGLE_DRAWER,
 } from '../constants';
 
 import {
-  loadRepos,
-  reposLoaded,
-  repoLoadingError,
+  closeDrawer,
+  toggleDrawer,
 } from '../actions';
 
 describe('App Actions', () => {
-  describe('loadRepos', () => {
+  describe('closeDrawer', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: LOAD_REPOS,
+        type: CLOSE_DRAWER,
       };
 
-      expect(loadRepos()).toEqual(expectedResult);
+      expect(closeDrawer()).toEqual(expectedResult);
     });
   });
 
-  describe('reposLoaded', () => {
-    it('should return the correct type and the passed repos', () => {
-      const fixture = ['Test'];
-      const username = 'test';
+  describe('toggleDrawer', () => {
+    it('should return the correct type', () => {
       const expectedResult = {
-        type: LOAD_REPOS_SUCCESS,
-        repos: fixture,
-        username,
+        type: TOGGLE_DRAWER,
       };
 
-      expect(reposLoaded(fixture, username)).toEqual(expectedResult);
-    });
-  });
-
-  describe('repoLoadingError', () => {
-    it('should return the correct type and the error', () => {
-      const fixture = {
-        msg: 'Something went wrong!',
-      };
-      const expectedResult = {
-        type: LOAD_REPOS_ERROR,
-        error: fixture,
-      };
-
-      expect(repoLoadingError(fixture)).toEqual(expectedResult);
+      expect(toggleDrawer()).toEqual(expectedResult);
     });
   });
 });
