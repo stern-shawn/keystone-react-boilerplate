@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import bulma from 'bulma'; // eslint-disable-line import/extensions
 
-import layout from 'styles/layout.scss';
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -53,7 +53,7 @@ class Blog extends Component {
       posts && <BlogPreviewList posts={posts} />;
 
     return (
-      <section id="content" className={layout.container}>
+      <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
       </section>
     );
