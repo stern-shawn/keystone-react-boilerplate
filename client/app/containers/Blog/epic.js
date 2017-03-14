@@ -1,4 +1,8 @@
-import { Observable } from 'rxjs';
+import {
+  fetchAllFullPosts,
+  fetchPageOfPosts,
+  fetchPostBySlug,
+} from 'utils/blogApi';
 import {
   GET_PAGINATED_POSTS,
   GET_POSTS,
@@ -9,29 +13,10 @@ import {
   setPosts,
 } from './actions';
 
-// Best practice to encapsulate fetch's Promise in an Observable
-const api = {
-  fetchAllFullPosts: () => {
-    const request = fetch('/api/post/paginated/')
-      .then((response) => response.json());
-    return Observable.from(request);
-  },
-  fetchPageOfPosts: (page) => {
-    const request = fetch(`/api/post/paginated/${page}`)
-      .then((response) => response.json());
-    return Observable.from(request);
-  },
-  fetchPostBySlug: (slug) => {
-    const request = fetch(`/api/post/slug/${slug}`)
-      .then((response) => response.json());
-    return Observable.from(request);
-  },
-};
-
 const getAllBlogPostsEpic = (action$) =>
   action$.ofType(GET_POSTS)
     .mergeMap(() =>
-      api.fetchAllFullPosts()
+      fetchAllFullPosts()
         .map((json) => setPosts(json.posts))
 
         // .catch((err) => {
@@ -43,14 +28,14 @@ const getAllBlogPostsEpic = (action$) =>
 const getPageOfPostsEpic = (action$) =>
   action$.ofType(GET_PAGINATED_POSTS)
     .mergeMap((action) =>
-      api.fetchPageOfPosts(action.page)
+      fetchPageOfPosts(action.page)
         .map((json) => setPosts(json.posts.results))
     );
 
 const getBlogPostBySlugEpic = (action$) =>
   action$.ofType(GET_POST_BY_SLUG)
     .mergeMap((action) =>
-      api.fetchPostBySlug(action.slug)
+      fetchPostBySlug(action.slug)
         .map((json) => setPost(json.post))
     );
 
