@@ -7,10 +7,10 @@ import LinkButton from '../LinkedComponents/LinkButton';
 import styles from './styles.scss';
 
 const NavBar = () => (
-  <div className={styles.bar}>
+  <nav className={styles.bar}>
     <LinkButton label="Home" to="/" />
     <LinkButton label="Features" to="/features" />
-  </div>
+  </nav>
 );
 
 export default NavBar;
