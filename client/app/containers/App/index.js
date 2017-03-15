@@ -32,7 +32,7 @@ import { makeSelectDrawerActive } from './selectors';
 import styles from './styles.scss';
 import theme from './themes.scss';
 
-const App = ({ children, drawerActive, onToggleDrawer }) => (
+export const App = ({ children, drawerActive, onToggleDrawer }) => (
   // Need to use a nested Layout structure to keep fixed AppBar from going
   // over the NavDrawer, at least until 2.x beta of react-toolbox is in production
   <div className={styles.appWrapper}>

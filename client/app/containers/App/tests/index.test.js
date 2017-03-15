@@ -1,24 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { Layout } from 'react-toolbox';
 import Footer from 'components/Footer';
 import { App } from '../index';
 
 describe('<App />', () => {
-  it('should render its children', () => {
-    const children = (<h1>Test</h1>);
+  it('should render two react-toolbox layouts (nested)', () => {
     const renderedComponent = shallow(
-      <App>
-        {children}
-      </App>
+      <App />
     );
-    expect(renderedComponent.contains(children)).toBe(true);
+    expect(renderedComponent.find(Layout).length).toBe(2);
   });
 
   it('should render the footer', () => {
     const renderedComponent = shallow(
       <App />
     );
-    expect(renderedComponent.find(Footer).length).toBe(1);
+    expect(renderedComponent.contains(<Footer />)).toBe(true);
   });
 });
