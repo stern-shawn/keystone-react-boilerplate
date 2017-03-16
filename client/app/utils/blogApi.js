@@ -21,9 +21,3 @@ export const fetchPostBySlug = (slug) => {
     .then((response) => response.json());
   return Observable.from(request);
 };
-//
-// export {
-//   fetchAllFullPosts,
-//   fetchPageOfPosts,
-//   fetchPostBySlug,
-// };
