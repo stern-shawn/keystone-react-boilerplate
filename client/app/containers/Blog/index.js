@@ -16,6 +16,7 @@ import {
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
+  // makeSelectLoadSuccess,
   makeSelectMaxPages,
 } from './selectors';
 
@@ -42,6 +43,16 @@ export class Blog extends Component {
     }
   }
 
+  // componentDidUpdate() {
+  //   const {
+  //     loadSuccess,
+  //   } = this.props;
+  //
+  //   if (!loadSuccess) {
+  //     alert('Failed to get posts :(');
+  //   }
+  // }
+
   render() {
     const {
       focusedPost,
@@ -67,6 +78,7 @@ Blog.propTypes = {
   currentPage: PropTypes.number,
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
+  // loadSuccess: PropTypes.bool,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([
@@ -88,6 +100,7 @@ const mapStateToProps = createStructuredSelector({
   maxPages: makeSelectMaxPages(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
+  // loadSuccess: makeSelectLoadSuccess(),
 });
 
 // Wrap the component to inject dispatch and state

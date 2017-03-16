@@ -26,6 +26,11 @@ const makeSelectLoading = () => createSelector(
   (blogState) => blogState.get('isLoading')
 );
 
+const makeSelectLoadSuccess = () => createSelector(
+  selectBlog,
+  (blogState) => blogState.get('loadSuccess')
+);
+
 const makeSelectMaxPages = () => createSelector(
   selectBlog,
   (blogState) => blogState.get('maxPages')
@@ -37,5 +42,6 @@ export {
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
+  makeSelectLoadSuccess,
   makeSelectMaxPages,
 };
