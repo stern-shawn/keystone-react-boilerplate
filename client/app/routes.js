@@ -31,6 +31,15 @@ export default function createRoutes() {
       },
     },
     {
+      path: '/store',
+      name: 'store',
+      getComponent(nextState, cb) {
+        import('containers/Store')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
       path: '/blog/:postSlug',
       name: 'blog',
       getComponent(nextState, cb) {
