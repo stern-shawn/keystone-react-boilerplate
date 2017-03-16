@@ -65,16 +65,15 @@ describe('<Blog />', () => {
   });
 
   describe('mapDispatchToProps', () => {
+    const dispatch = jest.fn();
+    const result = mapDispatchToProps(dispatch);
+
     describe('onGetPosts', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
         expect(result.onGetPosts).toBeDefined();
       });
 
       it('should dispatch getPageOfPosts when called', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
         const page = 1;
         result.onGetPosts(page);
         expect(dispatch).toHaveBeenCalledWith(getPageOfPosts(page));
@@ -83,14 +82,10 @@ describe('<Blog />', () => {
 
     describe('onGetPost', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
         expect(result.onGetPost).toBeDefined();
       });
 
       it('should dispatch getPostBySlug when called', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
         const slug = 'test-post-1';
         result.onGetPost(slug);
         expect(dispatch).toHaveBeenCalledWith(getPostBySlug(slug));
