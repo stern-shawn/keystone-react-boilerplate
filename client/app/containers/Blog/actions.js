@@ -3,14 +3,37 @@
  */
 
 import {
+  GET_ALL_POSTS,
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
-  GET_POSTS,
+  GET_POSTS_FAILED,
+  SET_PAGINATED_POSTS,
   SET_POST,
   SET_POSTS,
-  SET_PAGINATED_POSTS,
-  GET_POSTS_FAILED,
 } from './constants';
+
+/**
+ * Submit a request for all posts
+ *
+ * @return {object}    An action object with a type of GET_ALL_POSTS
+ */
+function getAllPosts() {
+  return {
+    type: GET_ALL_POSTS,
+  };
+}
+
+/**
+ * Submit a request for all posts from one 'page' in the DB
+ *
+ * @return {object}    An action object with a type of GET_PAGINATED_POSTS
+ */
+function getPageOfPosts(page) {
+  return {
+    type: GET_PAGINATED_POSTS,
+    page,
+  };
+}
 
 /**
  * Submit a request for one post by slug
@@ -25,25 +48,28 @@ function getPostBySlug(slug) {
 }
 
 /**
- * Submit a request for all posts
+ * Fallback method for if the API failed to respond with posts
  *
- * @return {object}    An action object with a type of GET_POSTS
+ * @return {object}    An action object with a type of GET_POSTS_FAILED
  */
-function getAllPosts() {
+function getPostsFailed() {
   return {
-    type: GET_POSTS,
+    type: GET_POSTS_FAILED,
   };
 }
 
 /**
- * Submit a request for all posts from one 'page' in the DB
+ * Updates the currently page of posts and updates the store with page stats
+ * such as which page is active and how many pages are in the DB
  *
- * @return {object}    An action object with a type of GET_PAGINATED_POSTS
+ * @param  {posts} posts Object of post counts, includes an array of posts
+ *
+ * @return {object}    An action object with a type of SET_PAGINATED_POSTS
  */
-function getPageOfPosts(page) {
+function setPaginatedPosts(paginatedData) {
   return {
-    type: GET_PAGINATED_POSTS,
-    page,
+    type: SET_PAGINATED_POSTS,
+    paginatedData,
   };
 }
 
@@ -75,38 +101,12 @@ function setPosts(posts) {
   };
 }
 
-/**
- * Updates the currently page of posts and updates the store with page stats
- * such as which page is active and how many pages are in the DB
- *
- * @param  {posts} posts Object of post counts, includes an array of posts
- *
- * @return {object}    An action object with a type of SET_PAGINATED_POSTS
- */
-function setPaginatedPosts(paginatedData) {
-  return {
-    type: SET_PAGINATED_POSTS,
-    paginatedData,
-  };
-}
-
-/**
- * Fallback method for if the API failed to respond with posts
- *
- * @return {object}    An action object with a type of GET_POSTS_FAILED
- */
-function getPostsFailed() {
-  return {
-    type: GET_POSTS_FAILED,
-  };
-}
-
 export {
+  getAllPosts,
   getPageOfPosts,
   getPostBySlug,
-  getAllPosts,
+  getPostsFailed,
+  setPaginatedPosts,
   setPost,
   setPosts,
-  setPaginatedPosts,
-  getPostsFailed,
 };
