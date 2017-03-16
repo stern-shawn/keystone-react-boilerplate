@@ -7,6 +7,7 @@
 
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
+import 'rxjs';
 // Needed polyfill for smoothscrolling (only supported by Firefox for now)
 import { polyfill as smoothScrollPolyfill } from 'smoothscroll-polyfill';
 
