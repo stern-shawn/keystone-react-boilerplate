@@ -19,7 +19,7 @@ import {
   makeSelectMaxPages,
 } from './selectors';
 
-class Blog extends Component {
+export class Blog extends Component {
   componentDidMount() {
     const {
       currentPage,
@@ -76,7 +76,8 @@ Blog.propTypes = {
   routeParams: PropTypes.object,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+// Need to export so we can test and have full test coverage in Jest
+export const mapDispatchToProps = (dispatch) => ({
   onGetPost: (slug) => dispatch(getPostBySlug(slug)),
   onGetPosts: (page) => dispatch(getPageOfPosts(page)),
 });
