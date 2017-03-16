@@ -2,21 +2,15 @@ import { fromJS } from 'immutable';
 
 import appReducer from '../reducer';
 import {
-  loadRepos,
-  reposLoaded,
-  repoLoadingError,
+  closeDrawer,
+  toggleDrawer,
 } from '../actions';
 
 describe('appReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
-      loading: false,
-      error: false,
-      currentUser: false,
-      userData: fromJS({
-        repositories: false,
-      }),
+      drawerActive: false,
     });
   });
 
@@ -25,36 +19,21 @@ describe('appReducer', () => {
     expect(appReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the loadRepos action correctly', () => {
+  it('should handle the closeDrawer action correctly', () => {
     const expectedResult = state
-      .set('loading', true)
-      .set('error', false)
-      .setIn(['userData', 'repositories'], false);
+      .set('drawerActive', false);
 
-    expect(appReducer(state, loadRepos())).toEqual(expectedResult);
+    expect(appReducer(state, closeDrawer())).toEqual(expectedResult);
   });
 
-  it('should handle the reposLoaded action correctly', () => {
-    const fixture = [{
-      name: 'My Repo',
-    }];
-    const username = 'test';
+  it('should handle the toggleDrawer action correctly', () => {
     const expectedResult = state
-      .setIn(['userData', 'repositories'], fixture)
-      .set('loading', false)
-      .set('currentUser', username);
+      .set('drawerActive', true);
 
-    expect(appReducer(state, reposLoaded(fixture, username))).toEqual(expectedResult);
-  });
+    const expectedResultNext = state
+      .set('drawerActive', true);
 
-  it('should handle the repoLoadingError action correctly', () => {
-    const fixture = {
-      msg: 'Not found',
-    };
-    const expectedResult = state
-      .set('error', fixture)
-      .set('loading', false);
-
-    expect(appReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
+    expect(appReducer(state, toggleDrawer())).toEqual(expectedResult);
+    expect(appReducer(state, toggleDrawer())).toEqual(expectedResultNext);
   });
 });

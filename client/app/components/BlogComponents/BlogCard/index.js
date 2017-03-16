@@ -6,7 +6,7 @@ import {
   htmlToString,
   truncate,
 } from 'utils/postFormatter';
-import bulma from 'bulma'; // eslint-disable-line import/extensions
+import bulma from 'styles/bulma.scss';
 
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import LinkButton from 'components/LinkedComponents/LinkButton';

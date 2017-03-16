@@ -1,42 +1,50 @@
-import {
-  fetchAllFullPosts,
-  fetchPageOfPosts,
-  fetchPostBySlug,
-} from 'utils/blogApi';
+import { Observable } from 'rxjs';
 import {
   GET_PAGINATED_POSTS,
-  GET_POSTS,
+  GET_ALL_POSTS,
   GET_POST_BY_SLUG,
+  GET_POSTS_FAILED,
 } from './constants';
 import {
   setPost,
   setPosts,
+  setPaginatedPosts,
 } from './actions';
 
-const getAllBlogPostsEpic = (action$) =>
-  action$.ofType(GET_POSTS)
+const getAllBlogPostsEpic = (action$, store, { blogApi }) =>
+  action$.ofType(GET_ALL_POSTS)
     .mergeMap(() =>
-      fetchAllFullPosts()
+      blogApi.fetchAllFullPosts()
         .map((json) => setPosts(json.posts))
-
-        // .catch((err) => {
-        //   // Error :(
-        //   console.error(`Error retrieving posts: ${err}`);
-        // })
+        .catch((error) => Observable.of({
+          type: GET_POSTS_FAILED,
+          payload: error.xhr.response,
+          error: true,
+        }))
     );
 
-const getPageOfPostsEpic = (action$) =>
+const getPageOfPostsEpic = (action$, store, { blogApi }) =>
   action$.ofType(GET_PAGINATED_POSTS)
     .mergeMap((action) =>
-      fetchPageOfPosts(action.page)
-        .map((json) => setPosts(json.posts.results))
+      blogApi.fetchPageOfPosts(action.page)
+        .map((json) => setPaginatedPosts(json.posts))
+        .catch((error) => Observable.of({
+          type: GET_POSTS_FAILED,
+          payload: error.xhr.response,
+          error: true,
+        }))
     );
 
-const getBlogPostBySlugEpic = (action$) =>
+const getBlogPostBySlugEpic = (action$, store, { blogApi }) =>
   action$.ofType(GET_POST_BY_SLUG)
     .mergeMap((action) =>
-      fetchPostBySlug(action.slug)
+      blogApi.fetchPostBySlug(action.slug)
         .map((json) => setPost(json.post))
+        .catch((error) => Observable.of({
+          type: GET_POSTS_FAILED,
+          payload: error.xhr.response,
+          error: true,
+        }))
     );
 
 export {

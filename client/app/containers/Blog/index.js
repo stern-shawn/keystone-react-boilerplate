@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import bulma from 'bulma'; // eslint-disable-line import/extensions
+import bulma from 'styles/bulma.scss';
 
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
@@ -16,10 +16,11 @@ import {
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
+  // makeSelectLoadSuccess,
   makeSelectMaxPages,
 } from './selectors';
 
-class Blog extends Component {
+export class Blog extends Component {
   componentDidMount() {
     const {
       currentPage,
@@ -41,6 +42,16 @@ class Blog extends Component {
       onGetPosts(currentPage);
     }
   }
+
+  // componentDidUpdate() {
+  //   const {
+  //     loadSuccess,
+  //   } = this.props;
+  //
+  //   if (!loadSuccess) {
+  //     alert('Failed to get posts :(');
+  //   }
+  // }
 
   render() {
     const {
@@ -67,6 +78,7 @@ Blog.propTypes = {
   currentPage: PropTypes.number,
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
+  // loadSuccess: PropTypes.bool,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([
@@ -76,7 +88,8 @@ Blog.propTypes = {
   routeParams: PropTypes.object,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+// Need to export so we can test and have full test coverage in Jest
+export const mapDispatchToProps = (dispatch) => ({
   onGetPost: (slug) => dispatch(getPostBySlug(slug)),
   onGetPosts: (page) => dispatch(getPageOfPosts(page)),
 });
@@ -87,6 +100,7 @@ const mapStateToProps = createStructuredSelector({
   maxPages: makeSelectMaxPages(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
+  // loadSuccess: makeSelectLoadSuccess(),
 });
 
 // Wrap the component to inject dispatch and state
