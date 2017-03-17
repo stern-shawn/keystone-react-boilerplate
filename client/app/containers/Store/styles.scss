@@ -12,12 +12,6 @@
   padding-left: 0;
 }
 
-.storeItem {
-  max-width: 200px;
-  margin: 10px 20px !important;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
 .buyLink {
   color: #3e8cb7;
   -webkit-transition: color 0.1s ease;
@@ -54,6 +48,7 @@
     background-color: rgba(0, 0, 0, 0.4);
   }
 }
+
 .hiddenButton {
   position: relative;
   top: 50%;

@@ -25,8 +25,8 @@ export class Store extends Component {
       const marketUrl = `https://squareup.com/market/wergittep/${spinalCase(item.name)}`;
       const price = monify(item.variations[0].price_money.amount);
       return (
-        <div className={`${bulma.column} ${bulma['is-one-quarter']} ${styles.dropCard}`}>
-          <div key={index} className={bulma.card}>
+        <div key={index} className={`${bulma.column} ${bulma['is-one-quarter']} ${styles.dropCard}`}>
+          <div className={bulma.card}>
             <div className={bulma['card-image']}>
               <figure className={`${bulma.image} ${bulma['is-1by1']}`}>
                 <img src={item.master_image.url} alt={item.name} />
