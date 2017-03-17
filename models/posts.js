@@ -44,6 +44,7 @@ Post.add({
     type: Types.CloudinaryImage,
     folder: 'keystoneBlog/posts/images/',
     allowedTypes: 'image/jpeg,image/svg+xml,image/png',
+    autoCleanup : true,
   },
   content: {
     brief: {
