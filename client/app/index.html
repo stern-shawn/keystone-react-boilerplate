@@ -23,5 +23,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically includes all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this HTML file. Don't add any assets here! (Check out the webpack config files in internals/webpack for details) -->
+    <script>
+    // I'm not proud of this
+    (function embed(d, id, src) {
+      var s = d.getElementById(id);
+      if (!s) {
+        s = d.createElement('script');
+        s.id = id;
+        s.src = src;
+        d.head.appendChild(s);
+      }
+    })(document, "sq-embed-js", "https://d2dyi2pd86a6cw.cloudfront.net/market/embed.js");
+    </script>
   </body>
 </html>

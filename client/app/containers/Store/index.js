@@ -5,15 +5,15 @@ import bulma from 'styles/bulma.scss';
 
 export class Store extends Component { // eslint-disable-line
   componentDidMount() {
-    this.appendNode();
+    // this.appendNode();
     this.appendScript();
   }
 
   appendNode = () => {
     const squareStoreNode = document.createElement('a');
     squareStoreNode.className = 'sq-embed-item';
-    squareStoreNode.setAttribute('href', 'https://squareup.com/market/wergittep/book');
-    squareStoreNode.setAttribute('target', '_blank');
+    squareStoreNode.href = 'https://squareup.com/market/wergittep/book';
+    squareStoreNode.target = '_blank';
     this.divNode.appendChild(squareStoreNode);
   };
 
@@ -25,6 +25,7 @@ export class Store extends Component { // eslint-disable-line
     }
     const squareScript = document.createElement('script');
     squareScript.id = 'sq-embed-js';
+    squareScript.type = 'text/javascript';
     squareScript.async = true;
     squareScript.src = 'https://d2dyi2pd86a6cw.cloudfront.net/market/embed.js';
     document.body.appendChild(squareScript);
@@ -32,7 +33,10 @@ export class Store extends Component { // eslint-disable-line
 
   render() {
     return (
-      <div ref={(div) => { this.divNode = div; }} className={bulma.container} />
+      <div ref={(div) => { this.divNode = div; }} className={bulma.container}>
+        <a href="https://squareup.com/market/wergittep/book" className="sq-embed-item">Pledge on Square Market</a>
+        <a href="https://squareup.com/market/joshu/black-keychain" className="sq-embed-item">Black Keychain on Square Market</a>
+      </div>
     );
   }
 }
