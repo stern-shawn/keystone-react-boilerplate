@@ -18,7 +18,5 @@ const itemsRequest = {
   },
 };
 
-export const fetchItems = () => {
-  console.log('Calling for items...');
-  return ajax(itemsRequest);
-};
+// Square Store API methods
+export const fetchItems = () => ajax(itemsRequest);
