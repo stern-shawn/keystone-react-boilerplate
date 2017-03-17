@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -25,7 +25,7 @@ export class Store extends Component {
       const marketUrl = `https://squareup.com/market/wergittep/${spinalCase(item.name)}`;
       const price = monify(item.variations[0].price_money.amount);
       return (
-        <div className={`${bulma.column} ${bulma['is-one-quarter']}`}>
+        <div className={`${bulma.column} ${bulma['is-one-quarter']} ${styles.dropCard}`}>
           <div key={index} className={bulma.card}>
             <div className={bulma['card-image']}>
               <figure className={`${bulma.image} ${bulma['is-1by1']}`}>
@@ -72,9 +72,9 @@ export class Store extends Component {
 }
 
 Store.propTypes = {
-  items: React.PropTypes.array,
-  loading: React.PropTypes.bool,
-  onGetItems: React.PropTypes.func,
+  items: PropTypes.array,
+  loading: PropTypes.bool,
+  onGetItems: PropTypes.func,
 };
 
 export const mapDispatchToProps = (dispatch) => ({
