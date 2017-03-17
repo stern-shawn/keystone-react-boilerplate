@@ -2,19 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import bulma from 'styles/bulma.scss';
+import styles from './styles.scss';
 
 export class Store extends Component { // eslint-disable-line
   componentDidMount() {
-    // this.appendNode();
+    this.appendNode();
     this.appendScript();
   }
 
   appendNode = () => {
-    const squareStoreNode = document.createElement('a');
-    squareStoreNode.className = 'sq-embed-item';
-    squareStoreNode.href = 'https://squareup.com/market/wergittep/book';
-    squareStoreNode.target = '_blank';
-    this.divNode.appendChild(squareStoreNode);
+    const nodes = [
+      {
+        text: 'Pledge on Square Market',
+        link: 'https://squareup.com/market/wergittep/book',
+      },
+      {
+        text: 'Black Keychain on Square Market',
+        link: 'https://squareup.com/market/joshu/black-keychain',
+      },
+    ];
+    nodes.forEach((node) => {
+      const squareNode = document.createElement('a');
+      squareNode.className = 'sq-embed-item';
+      squareNode.href = node.link;
+      squareNode.target = '_blank';
+      squareNode.text = node.text;
+      this.divNode.appendChild(squareNode);
+    });
   };
 
   appendScript = () => {
@@ -33,9 +47,8 @@ export class Store extends Component { // eslint-disable-line
 
   render() {
     return (
-      <div ref={(div) => { this.divNode = div; }} className={bulma.container}>
-        <a href="https://squareup.com/market/wergittep/book" className="sq-embed-item">Pledge on Square Market</a>
-        <a href="https://squareup.com/market/joshu/black-keychain" className="sq-embed-item">Black Keychain on Square Market</a>
+      <div ref={(div) => { this.divNode = div; }} className={`${bulma.container} ${bulma.content} ${styles.storeContainer}`}>
+        <h1 className={styles.mainHeader}>Welcome to my store!</h1>
       </div>
     );
   }
