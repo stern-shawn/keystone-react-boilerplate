@@ -10,3 +10,4 @@ logs
 
 # Ignore .env configuration files
 .env
+client/app/config.json

@@ -7,13 +7,18 @@ import {
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
 } from 'containers/Blog/epic';
+import {
+  getAllStoreItemsEpic,
+} from 'containers/Store/epic';
 import * as blogApi from 'utils/blogApi';
+import * as storeApi from 'utils/storeApi';
 
 const rootEpic = (...args) => combineEpics(
   closeNavEpic,
   getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
-)(...args, { blogApi });
+  getAllStoreItemsEpic,
+)(...args, { blogApi, storeApi });
 
 export default rootEpic;

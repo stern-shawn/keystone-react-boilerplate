@@ -20,11 +20,12 @@ keystone.init({
     api_key   : 'abc',
     api_secret: '123',
   },
-  
+
   'session': true,
   'auth': true,
   'user model': 'User',
   'cookie secret': process.env.COOKIE_SECRET || 'changeme',
+  'port': process.env.PORT || 3000,
 });
 
 require('./models');
