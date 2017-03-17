@@ -32,8 +32,8 @@ export class Store extends Component {
                 <img src={item.master_image.url} alt={item.name} />
                 <div className={styles.buyOverlay}>
                   <a href={marketUrl} target="_blank" className={`${styles.hiddenButton} ${bulma.button} ${bulma['is-success']}`}>
-                      Buy
-                    </a>
+                    Buy
+                  </a>
                 </div>
               </figure>
             </div>
@@ -61,7 +61,7 @@ export class Store extends Component {
     });
 
     return (
-      <div className={`${bulma.container} ${styles.storeContainer} ${bulma.content}`}>
+      <div className={`${bulma.container} ${bulma.content}`}>
         <h1 className={styles.mainHeader}>Welcome to my store!</h1>
         <div className={bulma.columns}>
           {loading ? <LoadingIndicator /> : shopCards}
