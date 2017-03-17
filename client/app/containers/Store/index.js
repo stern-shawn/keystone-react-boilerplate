@@ -63,7 +63,7 @@ export class Store extends Component {
     return (
       <div className={`${bulma.container} ${bulma.content}`}>
         <h1 className={styles.mainHeader}>Welcome to my store!</h1>
-        <div className={bulma.columns}>
+        <div className={`${bulma.columns} ${bulma['is-centered']} ${bulma['is-multiline']}`}>
           {loading ? <LoadingIndicator /> : shopCards}
         </div>
       </div>
