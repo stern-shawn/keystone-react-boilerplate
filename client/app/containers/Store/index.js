@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
+import { spinalCase } from 'utils/storeUtils';
 import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
+import { getAllItems } from './actions';
+import { makeSelectItems } from './selectors';
 
 export class Store extends Component { // eslint-disable-line
   componentDidMount() {
+    this.props.onGetItems();
     this.appendNode();
+    this.appendScript();
+  }
+
+  componentDidUpdate() {
+    console.log('New props received, attaching script again');
     this.appendScript();
   }
 
@@ -20,14 +30,29 @@ export class Store extends Component { // eslint-disable-line
         text: 'Black Keychain on Square Market',
         link: 'https://squareup.com/market/joshu/black-keychain',
       },
+      {
+        text: 'Pledge on Square Market',
+        link: 'https://squareup.com/market/wergittep/shawn-lifts-the-book',
+      },
+      {
+        text: 'Black Keychain on Square Market',
+        link: 'https://squareup.com/market/joshu/black-keychain',
+      },
+      {
+        text: 'Pledge on Square Market',
+        link: 'https://squareup.com/market/wergittep/book',
+      },
     ];
     nodes.forEach((node) => {
-      const squareNode = document.createElement('a');
-      squareNode.className = 'sq-embed-item';
-      squareNode.href = node.link;
-      squareNode.target = '_blank';
-      squareNode.text = node.text;
-      this.divNode.appendChild(squareNode);
+      const squareNode = document.createElement('li');
+      squareNode.className = styles.storeItem;
+      const squareLink = document.createElement('a');
+      squareLink.className = 'sq-embed-item';
+      squareLink.href = node.link;
+      squareLink.target = '_blank';
+      squareLink.text = node.text;
+      squareNode.appendChild(squareLink);
+      this.ulNode.appendChild(squareNode);
     });
   };
 
@@ -46,9 +71,20 @@ export class Store extends Component { // eslint-disable-line
   }
 
   render() {
+    const {
+      items,
+    } = this.props;
+
+    const urlName = items && spinalCase(items[1].name);
+
     return (
-      <div ref={(div) => { this.divNode = div; }} className={`${bulma.container} ${bulma.content} ${styles.storeContainer}`}>
+      <div ref={(div) => { this.divNode = div; }} className={`${bulma.container} ${styles.storeContainer} ${bulma.content}`}>
         <h1 className={styles.mainHeader}>Welcome to my store!</h1>
+        <h2>{items && items[0].name}</h2>
+        {items && <img src={items[0].master_image.url} alt={items[0].name} />}
+        {items && <a href={`https://squareup.com/store/wergittep/item/${urlName}`}>{items[1].name} at Sqaure Market</a>}
+        <ul ref={(ul) => { this.ulNode = ul; }} className={styles.storeList}>
+        </ul>
       </div>
     );
   }
@@ -59,12 +95,18 @@ export class Store extends Component { // eslint-disable-line
 //   <script src="https://d2dyi2pd86a6cw.cloudfront.net/market/embed.js" id="sq-embed-js" charSet="utf-8"></script>
 // </div>
 
-export const mapDispatchToProps = () => ({
+Store.propTypes = {
+  items: React.PropTypes.array,
+  onGetItems: React.PropTypes.func,
+};
 
+export const mapDispatchToProps = (dispatch) => ({
+  onGetItems: () => dispatch(getAllItems()),
+  dispatch,
 });
 
 const mapStateToProps = createStructuredSelector({
-
+  items: makeSelectItems(),
 });
 
 // Wrap the component to inject dispatch and state

@@ -6,5 +6,21 @@
 }
 
 .mainHeader {
+  margin-top: 10px;
   align-self: center;
+}
+
+.storeList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none !important;
+  padding-left: 0;
+}
+
+.storeItem {
+  max-width: 200px;
+  margin: 10px 20px !important;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
