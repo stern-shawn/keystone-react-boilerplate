@@ -22,6 +22,15 @@ Post.add({
     type: String,
     required: true,
   },
+  meta: {
+    title: { type: String },
+    description: { type: String },
+  },
+  categories: {
+    type: Types.Relationship,
+    ref: 'PostCategory',
+    many: true
+  },
   state: {
     type: Types.Select,
     options: 'draft, published, archived',
