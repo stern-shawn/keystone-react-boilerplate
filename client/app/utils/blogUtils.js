@@ -75,6 +75,7 @@ export const createMetaData = (post, fullPostUrl) => {
     { property: 'og:description', content: metaDescription },
     { property: 'og:type', content: 'article' },
     { property: 'og:image', content: metaImageUrl },
+    { property: 'og:image:secure_url', content: metaImageUrl.replace('http', 'https') },
     { property: 'og:url', content: fullPostUrl },
     // Twitter Cards
     { property: 'twitter:title', content: metaTitle },
