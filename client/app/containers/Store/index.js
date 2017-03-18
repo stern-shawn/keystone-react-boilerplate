@@ -56,7 +56,7 @@ export class Store extends Component {
                   </a>
                 </h6>
                 <a href={itemUrl} target="_blank" className={`${bulma.button} ${bulma['is-success']} ${bulma['is-outlined']} ${bulma['is-fullwidth']}`}>
-                  Buy now for ${price}
+                  Buy now for {price}
                 </a>
               </div>
             </div>
