@@ -22,8 +22,10 @@ export class Store extends Component {
     } = this.props;
 
     const shopCards = items && items.map((item, index) => {
-      const marketUrl = `https://squareup.com/market/wergittep/${spinalCase(item.name)}`;
+      const marketUrl = 'https://squareup.com/market/wergittep';
+      const itemUrl = `${marketUrl}/${spinalCase(item.name)}`;
       const price = monify(item.variations[0].price_money.amount);
+
       return (
         <div key={index} className={`${bulma.column} ${bulma['is-one-quarter']} ${styles.dropCard}`}>
           <div className={bulma.card}>
@@ -31,7 +33,7 @@ export class Store extends Component {
               <figure className={`${bulma.image} ${bulma['is-1by1']}`}>
                 <img src={item.master_image.url} alt={item.name} />
                 <div className={styles.buyOverlay}>
-                  <a href={marketUrl} target="_blank" className={`${styles.hiddenButton} ${bulma.button} ${bulma['is-success']}`}>
+                  <a href={itemUrl} target="_blank" className={`${styles.hiddenButton} ${bulma.button} ${bulma['is-success']}`}>
                     Buy
                   </a>
                 </div>
@@ -41,7 +43,7 @@ export class Store extends Component {
             <div className={bulma['card-content']}>
               <div className={bulma.content}>
                 <h5>
-                  <a href={marketUrl} target="_blank">
+                  <a href={itemUrl} target="_blank">
                     {item.name}
                   </a>
                 </h5>
@@ -50,7 +52,7 @@ export class Store extends Component {
                     Browse my store
                   </a>
                 </h6>
-                <a href={marketUrl} target="_blank" className={`${bulma.button} ${bulma['is-success']} ${bulma['is-outlined']} ${bulma['is-fullwidth']}`}>
+                <a href={itemUrl} target="_blank" className={`${bulma.button} ${bulma['is-success']} ${bulma['is-outlined']} ${bulma['is-fullwidth']}`}>
                   Buy now for ${price}
                 </a>
               </div>
