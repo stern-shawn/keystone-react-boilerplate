@@ -7,7 +7,8 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 import theme from './theme.scss';
 
-const BlogPost = ({ post }) => {
+const BlogPost = ({ postData }) => {
+  const post = postData.post;
   // Pull out post elements that might exist in different places or needs
   // formatting before injection
   const brief = post.content.brief.html || post.content.brief;
@@ -15,7 +16,7 @@ const BlogPost = ({ post }) => {
   const date = getDate(post.publishedDate);
 
   // Get meta data for dat SEO :3
-  const metaData = createMetaData(post);
+  const metaData = createMetaData(post, postData.fullPostUrl);
 
   return (
     <section className={`${styles.postArea} ${styles.dropCard} ${bulma.content}`}>

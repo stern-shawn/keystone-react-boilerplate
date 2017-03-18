@@ -90,8 +90,11 @@ exports.getSlug = function(req, res) {
       if (err) return res.apiError('database error', err);
       if (!item) return res.apiError('not found');
 
+      // doing .get(key) seems to be the only way to expose the virtual schema item...
+      // Keep investigating
       res.apiResponse({
         post: item,
+        fullPostUrl: item.get('fullPostUrl'),
       });
     });
 }

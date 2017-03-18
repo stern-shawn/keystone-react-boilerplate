@@ -63,7 +63,7 @@ export class Blog extends Component {
 
     // Display a single blog post or a list of previews depending on location in the app
     const BlogContainerContent = routeParams ?
-      focusedPost && <BlogPost post={focusedPost} /> :
+      focusedPost && <BlogPost postData={focusedPost} /> :
       posts && <BlogPreviewList posts={posts} />;
 
     return (

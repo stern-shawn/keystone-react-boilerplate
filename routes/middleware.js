@@ -11,6 +11,9 @@ exports.initLocals = function(req, res, next) {
   locals.user = req.user;
 
   // Add your own local variables here
+  
+  // Add baseUrl for social sharing/SEO goodies
+  locals.baseUrl = keystone.get('baseUrl');
 
   next();
 };

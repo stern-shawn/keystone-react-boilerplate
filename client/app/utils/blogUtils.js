@@ -54,12 +54,13 @@ export const truncate = (string, limit) => {
  * Generate full metadata for a given blog post's react-helmet, SEO!
  *
  * @param {object} post   A blog post
+ * @param {string} post   The full path to this blog post for social sharing
  *
  * @return {object} Returns an object of:
  *  {array} Array of meta-data objects for use by react-helmet
  *  {string} Meta title for the post
  */
-export const createMetaData = (post) => {
+export const createMetaData = (post, fullPostUrl) => {
   // Break post info into vars to save typing
   const metaTitle = post.meta.title || post.title;
   const metaDescription = post.meta.description || post.content.brief.html || post.content.brief;
@@ -68,16 +69,18 @@ export const createMetaData = (post) => {
   // All posts will have this minimum of meta data, tags might be added later
   let metaTags = [
     { name: metaTitle, content: metaDescription },
+    // Facebook Open Graph
     { property: 'og:title', content: metaTitle },
     { property: 'og:description', content: metaDescription },
     { property: 'og:type', content: 'article' },
     { property: 'og:image', content: metaImageUrl },
-    // url...
+    { property: 'og:url', content: fullPostUrl },
+    // Twitter Cards
     { property: 'twitter:title', content: metaTitle },
     { property: 'twitter:description', content: metaDescription },
     { property: 'twitter:card', content: 'summary_large_image' },
     { property: 'twitter:image:src', content: metaImageUrl },
-    // url...
+    { property: 'twitter:url', content: fullPostUrl },
   ];
 
   // If user has specified categories for this post, create a meta object for each
