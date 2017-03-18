@@ -62,9 +62,10 @@ export const truncate = (string, limit) => {
  */
 export const createMetaData = (post, fullPostUrl) => {
   // Break post info into vars to save typing
-  const metaTitle = post.meta.title || post.title;
-  const metaDescription = post.meta.description || post.content.brief.html || post.content.brief;
-  const metaImageUrl = post.image.url || null;
+  const brief = post.content.brief.html || post.content.brief;
+  const metaTitle = post.meta ? post.meta.title : post.title;
+  const metaDescription = post.meta ? post.meta.description : brief;
+  const metaImageUrl = post.image ? post.image.url : null;
 
   // All posts will have this minimum of meta data, tags might be added later
   let metaTags = [
