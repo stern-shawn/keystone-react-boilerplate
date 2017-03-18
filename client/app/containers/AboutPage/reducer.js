@@ -37,7 +37,7 @@ function aboutPageReducer(state = initialState, action) {
       return state
         .set('title', action.content.title)
         .set('heroImage', action.content.heroImage)
-        .set('content', action.content.content)
+        .set('content', action.content.content.extended.html)
         .set('isLoading', false)
         .set('loadSuccess', true);
     default:

@@ -52,9 +52,9 @@ class AboutPage extends Component { // eslint-disable-line react/prefer-stateles
 }
 
 AboutPage.propTypes = {
-  content: PropTypes.object,
+  content: PropTypes.string,
   title: PropTypes.string,
-  heroImage: PropTypes.string,
+  heroImage: PropTypes.object,
   loading: PropTypes.bool,
   onGetAboutContent: PropTypes.func,
 };
