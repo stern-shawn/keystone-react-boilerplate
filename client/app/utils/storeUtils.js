@@ -11,7 +11,11 @@ const monify = (num) => {
   const numStr = num.toString();
   const valueWithCents = insert(numStr, numStr.length - 2, '.');
   const formattedValue = parseFloat(valueWithCents)
-                         .toLocaleString(undefined, { minimumFractionDigits: 2 });
+                         .toLocaleString('en-US', {
+                           minimumFractionDigits: 2,
+                           style: 'currency',
+                           currency: 'USD',
+                         });
   return formattedValue;
 };
 

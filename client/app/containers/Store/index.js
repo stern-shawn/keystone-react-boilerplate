@@ -8,6 +8,7 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 import { getAllItems } from './actions';
 import { makeSelectItems, makeSelectLoading } from './selectors';
+const config = require('config.json');
 
 export class Store extends Component {
   componentDidMount() {
@@ -21,8 +22,10 @@ export class Store extends Component {
       loading,
     } = this.props;
 
+    const marketName = config.SQUARE_STORE_URL_NAME;
+    const marketUrl = `https://squareup.com/market/${marketName}`;
+
     const shopCards = items && items.map((item, index) => {
-      const marketUrl = 'https://squareup.com/market/wergittep';
       const itemUrl = `${marketUrl}/${spinalCase(item.name)}`;
       const price = monify(item.variations[0].price_money.amount);
 
@@ -53,7 +56,7 @@ export class Store extends Component {
                   </a>
                 </h6>
                 <a href={itemUrl} target="_blank" className={`${bulma.button} ${bulma['is-success']} ${bulma['is-outlined']} ${bulma['is-fullwidth']}`}>
-                  Buy now for ${price}
+                  Buy now for {price}
                 </a>
               </div>
             </div>
