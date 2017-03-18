@@ -5,7 +5,7 @@ import {
   getDate,
   htmlToString,
   truncate,
-} from 'utils/postFormatter';
+} from 'utils/blogUtils';
 import bulma from 'styles/bulma.scss';
 
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';

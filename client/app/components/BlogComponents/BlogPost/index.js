@@ -2,26 +2,26 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import { getDate } from 'utils/postFormatter';
+import { createMetaData, getDate } from 'utils/blogUtils';
 import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 import theme from './theme.scss';
 
 const BlogPost = ({ post }) => {
+  // Pull out post elements that might exist in different places or needs
+  // formatting before injection
   const brief = post.content.brief.html || post.content.brief;
   const postBody = post.content.extended.html || post.content.markdown.html;
   const date = getDate(post.publishedDate);
 
+  // Get meta data for dat SEO :3
+  const metaData = createMetaData(post);
+
   return (
     <section className={`${styles.postArea} ${styles.dropCard} ${bulma.content}`}>
       <Helmet
-        title={`${post.title} - Blog`}
-        meta={post.meta && [
-          {
-            name: post.meta.title,
-            content: post.meta.description,
-          },
-        ]}
+        title={`${metaData.metaTitle} - Blog`}
+        meta={metaData.metaTags}
       />
       <Card style={{ width: 'auto' }}>
         {post.image &&
