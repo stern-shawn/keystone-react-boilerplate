@@ -22,10 +22,10 @@ export default function createRoutes() {
       },
     },
     {
-      path: '/features',
-      name: 'features',
+      path: '/about',
+      name: 'about',
       getComponent(nextState, cb) {
-        import('containers/FeaturePage')
+        import('containers/AboutPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

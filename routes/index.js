@@ -32,6 +32,11 @@ var routes = {
 exports = module.exports = function(app) {
   // API Endpoints
   app.get(
+    '/api/aboutContent',
+    keystone.middleware.api,
+    routes.api.aboutPage.aboutContent
+  );
+  app.get(
     '/api/post/list',
     keystone.middleware.api,
     routes.api.posts.fullList

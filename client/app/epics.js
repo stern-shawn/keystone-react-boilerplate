@@ -1,5 +1,8 @@
 import { combineEpics } from 'redux-observable';
 import {
+  getAboutPageEpic,
+} from 'containers/AboutPage/epic';
+import {
   closeNavEpic,
 } from 'containers/App/epic';
 import {
@@ -10,15 +13,17 @@ import {
 import {
   getAllStoreItemsEpic,
 } from 'containers/Store/epic';
+import * as aboutPageApi from 'utils/aboutPageApi';
 import * as blogApi from 'utils/blogApi';
 import * as storeApi from 'utils/storeApi';
 
 const rootEpic = (...args) => combineEpics(
   closeNavEpic,
+  getAboutPageEpic,
   getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
   getAllStoreItemsEpic,
-)(...args, { blogApi, storeApi });
+)(...args, { aboutPageApi, blogApi, storeApi });
 
 export default rootEpic;
