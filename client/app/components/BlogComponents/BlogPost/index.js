@@ -1,5 +1,6 @@
 // Element for displaying blog previews
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { getDate } from 'utils/postFormatter';
 import bulma from 'styles/bulma.scss';
@@ -13,6 +14,15 @@ const BlogPost = ({ post }) => {
 
   return (
     <section className={`${styles.postArea} ${styles.dropCard} ${bulma.content}`}>
+      <Helmet
+        title={`${post.title} - Blog`}
+        meta={post.meta && [
+          {
+            name: post.meta.title,
+            content: post.meta.description,
+          },
+        ]}
+      />
       <Card style={{ width: 'auto' }}>
         {post.image &&
           <CardMedia
