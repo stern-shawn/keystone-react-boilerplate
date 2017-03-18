@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import LoadingIndicator from 'components/LoadingIndicator';
 import bulma from 'styles/bulma.scss';
+import styles from './styles.scss';
 
 import { getAboutContent } from './actions';
 import {
@@ -34,18 +35,39 @@ class AboutPage extends Component { // eslint-disable-line react/prefer-stateles
       loading,
     } = this.props;
 
+    const aboutPageContent = content && (
+      <div className={`${bulma.column} ${styles.dropCard}`}>
+        <div className={bulma.card}>
+          <div className={bulma['card-image']}>
+            <figure className={`${bulma.image} ${bulma['is-16by9']}`}>
+              <img src={heroImage.url} alt={heroImage.public_id} />
+            </figure>
+          </div>
+          <header className={bulma['card-header']}>
+            <p className={bulma['card-header-title']}>
+              {title}
+            </p>
+          </header>
+          <div className={bulma['card-content']}>
+            <div className={bulma.content}>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
-      <div className={bulma.container}>
+      <div className={`${bulma.container} ${styles.aboutContainer}`}>
         <Helmet
           title="About Me Page"
           meta={[
             { name: 'description', content: 'About page for the author of this blog' },
           ]}
         />
-        <div className={bulma.content}>
-          <LoadingIndicator />
+        <div className={bulma.columns}>
+          {loading ? <LoadingIndicator /> : aboutPageContent}
         </div>
-
       </div>
     );
   }
