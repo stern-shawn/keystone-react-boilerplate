@@ -6,6 +6,7 @@ import bulma from 'styles/bulma.scss';
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Paginator from 'components/Paginator';
 
 import {
   getPostBySlug,
@@ -69,6 +70,7 @@ export class Blog extends Component {
     return (
       <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
+        <Paginator />
       </section>
     );
   }
