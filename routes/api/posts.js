@@ -10,6 +10,7 @@ exports.fullList = function(req, res) {
   Post.model
   .find()
   .where('state', 'published')
+  .populate('author categories')
   .exec(function(err, items) {
     if (err) return res.apiError('database error', err);
 
@@ -26,6 +27,7 @@ exports.fullLatestList = function(req, res) {
   Post.model
     .find()
     .where('state', 'published')
+    .populate('author categories')
     .sort('-publishedDate')
     .exec(function(err, items) {
       if (err) return res.apiError('database error', err);
@@ -83,12 +85,16 @@ exports.getSlug = function(req, res) {
       state: 'published',
       slug: req.params.slug,
     })
+    .populate('author categories')
     .exec(function (err, item) {
       if (err) return res.apiError('database error', err);
       if (!item) return res.apiError('not found');
 
+      // doing .get(key) seems to be the only way to expose the virtual schema item...
+      // Keep investigating
       res.apiResponse({
         post: item,
+        fullPostUrl: item.get('fullPostUrl'),
       });
     });
 }

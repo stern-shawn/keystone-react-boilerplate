@@ -22,6 +22,15 @@ Post.add({
     type: String,
     required: true,
   },
+  meta: {
+    title: { type: String },
+    description: { type: String },
+  },
+  categories: {
+    type: Types.Relationship,
+    ref: 'PostCategory',
+    many: true
+  },
   state: {
     type: Types.Select,
     options: 'draft, published, archived',
@@ -59,8 +68,12 @@ Post.add({
   // categories: { type: Types.Relationship, ref: 'PostCategory', many: true }
 });
 
-Post.schema.virtual('content.full').get(function () {
-  return this.content.extended || this.content.brief;
+// Post.schema.virtual('content.full').get(function () {
+//   return this.content.extended || this.content.brief;
+// });
+
+Post.schema.virtual('fullPostUrl').get(function() {
+  return keystone.get('baseUrl') + 'blog/' + this.slug;
 });
 
 Post.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';

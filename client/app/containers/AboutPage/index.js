@@ -60,9 +60,12 @@ class AboutPage extends Component { // eslint-disable-line react/prefer-stateles
     return (
       <div className={`${bulma.container} ${styles.aboutContainer}`}>
         <Helmet
-          title="About Me Page"
+          title="About Me"
           meta={[
-            { name: 'description', content: 'About page for the author of this blog' },
+            {
+              name: 'description',
+              content: 'About page for the author of this blog',
+            },
           ]}
         />
         <div className={bulma.columns}>

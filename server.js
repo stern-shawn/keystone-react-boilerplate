@@ -35,6 +35,10 @@ keystone.set('locals', {
   env: keystone.get('env'),
 });
 
+// Expose base url of this site so that we can autogenerate social sharing/SEO
+// content relative to this site
+keystone.set('baseUrl', (keystone.get('env') == 'production') ? 'https://kipscrazyblog.com/' : 'http://localhost:3000/');
+
 keystone.set('routes', require('./routes'));
 
 keystone.start();

@@ -39,7 +39,7 @@ const getBlogPostBySlugEpic = (action$, store, { blogApi }) =>
   action$.ofType(GET_POST_BY_SLUG)
     .mergeMap((action) =>
       blogApi.fetchPostBySlug(action.slug)
-        .map((json) => setPost(json.post))
+        .map((json) => setPost(json))
         .catch((error) => Observable.of({
           type: GET_POSTS_FAILED,
           payload: error.xhr.response,

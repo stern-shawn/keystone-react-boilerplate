@@ -7,6 +7,29 @@
   }
 }
 
+.socialIcon {
+  margin-left: 5px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.facebookIcon {
+  composes: socialIcon;
+  color: #3b5998;
+}
+
+.googlePlusIcon {
+  composes: socialIcon;
+  color: #dd4b39;
+}
+
+.twitterIcon {
+  composes: socialIcon;
+  color: #55acee;
+}
+
 .dropCard {
   -webkit-animation: fade-in-down 0.6s;
   animation: fade-in-down 0.6s both;
