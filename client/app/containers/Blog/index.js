@@ -56,8 +56,10 @@ export class Blog extends Component {
 
   render() {
     const {
+      currentPage,
       focusedPost,
       loading,
+      maxPages,
       posts,
       routeParams,
     } = this.props;
@@ -70,7 +72,7 @@ export class Blog extends Component {
     return (
       <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
-        <Paginator />
+        <Paginator currPage={currentPage} numPages={maxPages} />
       </section>
     );
   }
@@ -81,6 +83,7 @@ Blog.propTypes = {
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
   // loadSuccess: PropTypes.bool,
+  maxPages: PropTypes.number,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([
