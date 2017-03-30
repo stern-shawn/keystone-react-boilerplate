@@ -60,6 +60,7 @@ export class Blog extends Component {
       focusedPost,
       loading,
       maxPages,
+      onGetPosts,
       posts,
       routeParams,
     } = this.props;
@@ -72,7 +73,12 @@ export class Blog extends Component {
     return (
       <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
-        {!routeParams ? <Paginator currPage={currentPage} numPages={maxPages} /> : null}
+        {!routeParams ?
+          <Paginator
+            currPage={currentPage}
+            numPages={maxPages}
+            getPosts={onGetPosts}
+          /> : null}
       </section>
     );
   }

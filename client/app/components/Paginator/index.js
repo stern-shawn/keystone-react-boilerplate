@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 
-const Paginator = ({ currPage, numPages }) => {
+const Paginator = ({ currPage, numPages, getPosts }) => {
   let pageRange;
 
   if (numPages <= 6) {
@@ -26,7 +26,7 @@ const Paginator = ({ currPage, numPages }) => {
 
     return (
       <li key={idx}>
-        <a className={buttonStyle}>{val}</a>
+        <button className={buttonStyle} onClick={() => getPosts(val)}>{val}</button>
       </li>
     );
   });
@@ -55,6 +55,7 @@ const Paginator = ({ currPage, numPages }) => {
 Paginator.propTypes = {
   currPage: PropTypes.number,
   numPages: PropTypes.number,
+  getPosts: PropTypes.func,
 };
 
 export default Paginator;
