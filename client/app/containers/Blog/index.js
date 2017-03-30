@@ -72,7 +72,7 @@ export class Blog extends Component {
     return (
       <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
-        <Paginator currPage={currentPage} numPages={maxPages} />
+        {!routeParams ? <Paginator currPage={currentPage} numPages={maxPages} /> : null}
       </section>
     );
   }
