@@ -51,8 +51,8 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
 
   return (
     <nav className={paginatorStyle}>
-      <a className={prevStyle}>Previous</a>
-      <a className={nextStyle}>Next Page</a>
+      <button className={prevStyle} onClick={() => getPosts(currPage - 1)}>Previous</button>
+      <button className={nextStyle} onClick={() => getPosts(currPage + 1)}>Next Page</button>
       <ul className={bulma['pagination-list']}>
         {pageControls}
       </ul>
