@@ -9,7 +9,7 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
   let pageRange;
 
   if (numPages <= 6) {
-    // Build up an array of the page indexes from 1...numPages, convert to li's
+    // Build up an array of the page indicies from 1...numPages for our li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
   } else {
     const midPoint = Math.floor(numPages / 2);
