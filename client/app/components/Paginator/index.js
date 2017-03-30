@@ -6,27 +6,29 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 
 const Paginator = ({ currPage, numPages }) => {
-  let pageRange = [];
-  let pageControls;
+  let pageRange;
 
-  if (numPages <= 5) {
+  if (numPages <= 6) {
     // Build up an array of the page indexes from 1...numPages, convert to li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
-    pageControls = pageRange.map((val) => {
-      // Conditionally add the is-current class from bulma if the current page
-      const buttonStyle = classNames({
-        [bulma['pagination-link']]: true,
-        [bulma['is-current']]: currPage === val,
-      });
-
-      return (
-        <li key={val}>
-          <a className={buttonStyle}>{val}</a>
-        </li>
-      );
-    }
-    );
+  } else {
+    pageRange = [1, '...', Math.floor(numPages / 2) - 1, Math.floor(numPages / 2), Math.floor(numPages / 2) + 1, '...', numPages];
   }
+
+  const pageControls = pageRange.map((val, idx) => {
+    // Conditionally add the is-current class from bulma if the current page
+    const buttonStyle = classNames({
+      [bulma['pagination-link']]: val !== '...',
+      [bulma['pagination-ellipsis']]: val === '...',
+      [bulma['is-current']]: currPage === val,
+    });
+
+    return (
+      <li key={idx}>
+        <a className={buttonStyle}>{val}</a>
+      </li>
+    );
+  });
 
   return (
     <nav className={`${bulma.pagination} ${bulma['is-centered']} ${bulma['is-medium']} ${styles.paginator}`}>
