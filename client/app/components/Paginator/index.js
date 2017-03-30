@@ -31,19 +31,23 @@ const Paginator = ({ currPage, numPages }) => {
     );
   });
 
+  // Visually disable the prev/next buttons when at end ranges
+  const prevStyle = classNames({
+    [bulma['pagination-previous']]: true,
+    [bulma['is-disabled']]: currPage === 1,
+  });
+
+  const nextStyle = classNames({
+    [bulma['pagination-next']]: true,
+    [bulma['is-disabled']]: currPage === numPages,
+  });
+
   return (
     <nav className={`${bulma.pagination} ${bulma['is-centered']} ${bulma['is-medium']} ${styles.paginator}`}>
-      <a className={`${bulma['pagination-previous']}`}>Previous</a>
-      <a className={`${bulma['pagination-next']}`}>Next Page</a>
+      <a className={prevStyle}>Previous</a>
+      <a className={nextStyle}>Next Page</a>
       <ul className={`${bulma['pagination-list']}`}>
         {pageControls}
-        {/*<li><a className={`${bulma['pagination-link']}`}>1</a></li>
-        <li><span className={`${bulma['pagination-ellipsis']}`}>&hellip;</span></li>
-        <li><a className={`${bulma['pagination-link']}`}>45</a></li>
-        <li><a className={`${bulma['pagination-link']} ${bulma['is-current']}`}>46</a></li>
-        <li><a className={`${bulma['pagination-link']}`}>47</a></li>
-        <li><span className={`${bulma['pagination-ellipsis']}`}>&hellip;</span></li>
-        <li><a className={`${bulma['pagination-link']}`}>86</a></li>*/}
       </ul>
     </nav>);
 };
