@@ -31,6 +31,13 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
     );
   });
 
+  const paginatorStyle = classNames(
+    bulma.pagination,
+    styles.paginator,
+    bulma['is-centered'],
+    bulma['is-large']
+  );
+
   // Visually disable the prev/next buttons when at end ranges
   const prevStyle = classNames({
     [bulma['pagination-previous']]: true,
@@ -43,10 +50,10 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
   });
 
   return (
-    <nav className={`${bulma.pagination} ${bulma['is-centered']} ${bulma['is-medium']} ${styles.paginator}`}>
+    <nav className={paginatorStyle}>
       <a className={prevStyle}>Previous</a>
       <a className={nextStyle}>Next Page</a>
-      <ul className={`${bulma['pagination-list']}`}>
+      <ul className={bulma['pagination-list']}>
         {pageControls}
       </ul>
     </nav>);
