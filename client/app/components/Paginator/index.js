@@ -1,23 +1,30 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
 // Styles
 import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 
-// Components
-// import LinkButton from '../LinkedComponents/LinkButton';
-
 const Paginator = ({ currPage, numPages }) => {
   let pageRange = [];
   let pageControls;
 
-  if (numPages < 5) {
+  if (numPages <= 5) {
     // Build up an array of the page indexes from 1...numPages, convert to li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
-    pageControls = pageRange.map((val) =>
-      <li key={val}>
-        <a className={`${bulma['pagination-link']}`}>{val}</a>
-      </li>
+    pageControls = pageRange.map((val) => {
+      // Conditionally add the is-current class from bulma if the current page
+      const buttonStyle = classNames({
+        [bulma['pagination-link']]: true,
+        [bulma['is-current']]: currPage === val,
+      });
+
+      return (
+        <li key={val}>
+          <a className={buttonStyle}>{val}</a>
+        </li>
+      );
+    }
     );
   }
 
