@@ -12,7 +12,8 @@ const Paginator = ({ currPage, numPages }) => {
     // Build up an array of the page indexes from 1...numPages, convert to li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
   } else {
-    pageRange = [1, '...', Math.floor(numPages / 2) - 1, Math.floor(numPages / 2), Math.floor(numPages / 2) + 1, '...', numPages];
+    const midPoint = Math.floor(numPages / 2);
+    pageRange = [1, '...', midPoint - 1, midPoint, midPoint + 1, '...', numPages];
   }
 
   const pageControls = pageRange.map((val, idx) => {
