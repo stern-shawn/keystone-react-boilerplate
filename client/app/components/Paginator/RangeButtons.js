@@ -34,11 +34,9 @@ const RangeButtons = ({ currPage, numPages, getPosts }) => {
 
     return (
       <li key={idx}>
-        {
-          val !== '...' ?
-            <button className={buttonStyle} onClick={() => getPosts(val)}>{val}</button> :
-            <button className={buttonStyle}>{val}</button>
-        }
+        {val !== '...' ?
+          <button className={buttonStyle} onClick={() => getPosts(val)}>{val}</button> :
+          <button className={buttonStyle}>{val}</button>}
       </li>
     );
   });
