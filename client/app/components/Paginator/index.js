@@ -6,6 +6,13 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 
 const Paginator = ({ currPage, numPages, getPosts }) => {
+  // Wrapper function to prevent out of range page requests
+  const getPostsSafe = (target) => {
+    if (target > 0 && target <= numPages) {
+      getPosts(target);
+    }
+  };
+
   const midPoint = Math.floor(numPages / 2);
 
   let pageRange;
@@ -59,8 +66,8 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
 
   return (
     <nav className={paginatorStyle}>
-      <button className={prevStyle} onClick={() => getPosts(currPage - 1)}>Previous</button>
-      <button className={nextStyle} onClick={() => getPosts(currPage + 1)}>Next Page</button>
+      <button className={prevStyle} onClick={() => getPostsSafe(currPage - 1)}>Previous</button>
+      <button className={nextStyle} onClick={() => getPostsSafe(currPage + 1)}>Next Page</button>
       <ul className={bulma['pagination-list']}>
         {pageControls}
       </ul>
