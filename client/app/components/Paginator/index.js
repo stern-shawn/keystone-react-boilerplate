@@ -7,13 +7,20 @@ import styles from './styles.scss';
 
 const Paginator = ({ currPage, numPages, getPosts }) => {
   let pageRange;
+  const midPoint = Math.floor(numPages / 2);
 
   if (numPages <= 6) {
     // Build up an array of the page indicies from 1...numPages for our li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
+  } else if (numPages > 6 && currPage <= 3) {
+    // Directly show 1-3 at this low range and show midpoint/end for sense of scale
+    pageRange = [1, 2, 3, '...', midPoint, '...', numPages];
+  } else if (numPages > 6 && currPage >= (numPages - 2)) {
+    // Likewise, show last three at this range and beginning/midpoint for sense of scale
+    pageRange = [1, '...', midPoint, '...', numPages - 2, numPages - 1, numPages];
   } else {
-    const midPoint = Math.floor(numPages / 2);
-    pageRange = [1, '...', midPoint - 1, midPoint, midPoint + 1, '...', numPages];
+    // In all other cases, we want the current page to be focused and centered
+    pageRange = [1, '...', currPage - 1, currPage, currPage + 1, '...', numPages];
   }
 
   const pageControls = pageRange.map((val, idx) => {
