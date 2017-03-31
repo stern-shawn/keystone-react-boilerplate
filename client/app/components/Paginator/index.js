@@ -6,9 +6,9 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 
 const Paginator = ({ currPage, numPages, getPosts }) => {
-  let pageRange;
   const midPoint = Math.floor(numPages / 2);
 
+  let pageRange;
   if (numPages <= 6) {
     // Build up an array of the page indicies from 1...numPages for our li's
     pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
@@ -24,7 +24,8 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
   }
 
   const pageControls = pageRange.map((val, idx) => {
-    // Conditionally add the is-current class from bulma if the current page
+    // Conditionally add the is-current class from bulma if the current page,
+    // and apply proper styling to ellipses vs link elements
     const buttonStyle = classNames({
       [bulma['pagination-link']]: val !== '...',
       [bulma['pagination-ellipsis']]: val === '...',
