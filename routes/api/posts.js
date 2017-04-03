@@ -44,8 +44,8 @@ exports.fullLatestList = function(req, res) {
 exports.paginatedList = function(req, res) {
   Post.paginate({
     page: req.params.page || 1,
-    perPage: 10,
-    maxPages: 10
+    perPage: 5,
+    maxPages: 100
   })
   .where('state', 'published')
   .sort('-publishedDate')

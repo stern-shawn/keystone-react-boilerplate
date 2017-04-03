@@ -6,6 +6,7 @@ import bulma from 'styles/bulma.scss';
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Paginator from 'components/Paginator';
 
 import {
   getPostBySlug,
@@ -55,8 +56,11 @@ export class Blog extends Component {
 
   render() {
     const {
+      currentPage,
       focusedPost,
       loading,
+      maxPages,
+      onGetPosts,
       posts,
       routeParams,
     } = this.props;
@@ -69,6 +73,12 @@ export class Blog extends Component {
     return (
       <section id="content" className={bulma.container}>
         {loading ? <LoadingIndicator /> : BlogContainerContent}
+        {!routeParams ?
+          <Paginator
+            currPage={currentPage}
+            numPages={maxPages}
+            getPosts={onGetPosts}
+          /> : null}
       </section>
     );
   }
@@ -79,6 +89,7 @@ Blog.propTypes = {
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
   // loadSuccess: PropTypes.bool,
+  maxPages: PropTypes.number,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
   posts: PropTypes.oneOfType([
