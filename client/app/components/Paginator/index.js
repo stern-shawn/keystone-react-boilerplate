@@ -13,6 +13,8 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
   const getPostsSafe = (target) => {
     if (target > 0 && target <= numPages) {
       getPosts(target);
+    } else {
+      console.warn(`User attempted to request invalid page number: ${target}`);
     }
   };
 
