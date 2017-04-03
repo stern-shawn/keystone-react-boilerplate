@@ -9,18 +9,23 @@ const RangeButtons = ({ currPage, numPages, getPosts }) => {
   const midPoint = Math.floor(numPages / 2);
 
   let pageRange;
-  if (numPages <= 6) {
-    // Build up an array of the page indicies from 1...numPages for our li's
-    pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
-  } else if (numPages > 6 && currPage <= 3) {
-    // Directly show 1-3 at this low range and show midpoint/end for sense of scale
-    pageRange = [1, 2, 3, '...', midPoint, '...', numPages];
-  } else if (numPages > 6 && currPage >= (numPages - 2)) {
-    // Likewise, show last three at this range and beginning/midpoint for sense of scale
-    pageRange = [1, '...', midPoint, '...', numPages - 2, numPages - 1, numPages];
-  } else {
-    // In all other cases, we want the current page to be focused and centered
-    pageRange = [1, '...', currPage - 1, currPage, currPage + 1, '...', numPages];
+  switch (true) {
+    case numPages <= 6:
+      // Build up an array of the page indicies from 1...numPages for our li's
+      pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
+      break;
+    case currPage <= 3:
+      // Directly show 1-3 at this low range and show midpoint/end for sense of scale
+      pageRange = [1, 2, 3, '...', midPoint, '...', numPages];
+      break;
+    case currPage >= (numPages - 2):
+      // Likewise, show last three at this range and beginning/midpoint for sense of scale
+      pageRange = [1, '...', midPoint, '...', numPages - 2, numPages - 1, numPages];
+      break;
+    default:
+      // In all other cases, we want the current page to be focused and centered
+      pageRange = [1, '...', currPage - 1, currPage, currPage + 1, '...', numPages];
+      break;
   }
 
   const buttons = pageRange.map((val, idx) => {
