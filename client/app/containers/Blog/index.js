@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import bulma from 'styles/bulma.scss';
+import classNames from 'classnames';
 
 import BlogPreviewList from 'components/BlogComponents/BlogPreviewList';
 import BlogPost from 'components/BlogComponents/BlogPost';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Paginator from 'components/Paginator';
+
+import bulma from 'styles/bulma.scss';
+import styles from './styles.scss';
 
 import {
   getPostBySlug,
@@ -17,7 +21,7 @@ import {
   makeSelectFocusedPost,
   makeSelectPosts,
   makeSelectLoading,
-  // makeSelectLoadSuccess,
+  makeSelectLoadSuccess,
   makeSelectMaxPages,
 } from './selectors';
 
@@ -64,11 +68,18 @@ export class Blog extends Component {
       currentPage,
       focusedPost,
       loading,
+      loadSuccess,
       maxPages,
       onGetPosts,
       posts,
       routeParams,
     } = this.props;
+
+    const errStyle = classNames(
+      bulma.content,
+      bulma['has-text-centered'],
+      styles.errMessage
+    );
 
     // Display a single blog post or a list of previews depending on location in the app
     const BlogContainerContent = routeParams ?
@@ -77,13 +88,23 @@ export class Blog extends Component {
 
     return (
       <section id="content" className={bulma.container}>
-        {loading ? <LoadingIndicator /> : BlogContainerContent}
-        {!routeParams ?
-          <Paginator
+        {loading
+          ? <LoadingIndicator />
+          : BlogContainerContent
+        }
+        {!loading && !loadSuccess &&
+          <div className={errStyle}>
+            <h2>Invalid page requested or connection failed, <Link to={'/page/1'}>click here</Link> to start at the first page</h2>
+          </div>
+        }
+        {!routeParams
+          ? <Paginator
             currPage={currentPage}
             numPages={maxPages}
             getPosts={onGetPosts}
-          /> : null}
+          />
+          : null
+        }
       </section>
     );
   }
@@ -93,7 +114,7 @@ Blog.propTypes = {
   currentPage: PropTypes.number,
   focusedPost: PropTypes.object,
   loading: PropTypes.bool,
-  // loadSuccess: PropTypes.bool,
+  loadSuccess: PropTypes.bool,
   maxPages: PropTypes.number,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
@@ -117,7 +138,7 @@ const mapStateToProps = createStructuredSelector({
   maxPages: makeSelectMaxPages(),
   posts: makeSelectPosts(),
   loading: makeSelectLoading(),
-  // loadSuccess: makeSelectLoadSuccess(),
+  loadSuccess: makeSelectLoadSuccess(),
 });
 
 // Wrap the component to inject dispatch and state
