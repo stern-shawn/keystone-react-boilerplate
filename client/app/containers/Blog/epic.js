@@ -19,7 +19,7 @@ const getAllBlogPostsEpic = (action$, store, { blogApi }) =>
         .map((json) => setPosts(json.posts))
         .catch((error) => Observable.of({
           type: GET_POSTS_FAILED,
-          payload: error.xhr.response,
+          payload: error,
           error: true,
         }))
     );
@@ -48,7 +48,7 @@ const getBlogPostBySlugEpic = (action$, store, { blogApi }) =>
         .map((json) => setPost(json))
         .catch((error) => Observable.of({
           type: GET_POSTS_FAILED,
-          payload: error.xhr.response,
+          payload: error,
           error: true,
         }))
     );

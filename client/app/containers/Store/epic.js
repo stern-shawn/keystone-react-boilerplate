@@ -14,7 +14,7 @@ const getAllStoreItemsEpic = (action$, store, { storeApi }) =>
         .map((json) => setItems(json.response))
         .catch((error) => Observable.of({
           type: GET_ITEMS_FAILED,
-          payload: error.xhr.response,
+          payload: error,
           error: true,
         }))
     );
