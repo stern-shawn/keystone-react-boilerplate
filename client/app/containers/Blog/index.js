@@ -27,6 +27,7 @@ export class Blog extends Component {
       currentPage,
       onGetPost,
       onGetPosts,
+      prefetchPage,
       routeParams,
     } = this.props;
 
@@ -36,6 +37,10 @@ export class Blog extends Component {
       // Get and render the single post foxued by the user
       console.log(`Retrieve blog post: ${routeParams.postSlug}`);
       onGetPost(routeParams.postSlug);
+    } else if (prefetchPage) {
+      // Fetch requested page on load instead of defaulting to 1
+      console.log(`Page subroute, loading page ${prefetchPage}`);
+      onGetPosts(prefetchPage);
     } else {
       // On mount, fetch posts from the API to populate the redux store
       // The template below will populate itself based on the store's contents
@@ -96,6 +101,7 @@ Blog.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]),
+  prefetchPage: PropTypes.number,
   routeParams: PropTypes.object,
 };
 

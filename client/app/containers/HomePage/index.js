@@ -23,7 +23,7 @@ const HomePage = ({ routeParams }) => (
       ]}
     />
     <LandingHeader compact={routeParams.pageId !== undefined} />
-    <Blog />
+    <Blog prefetchPage={parseInt(routeParams.pageId, 10)} />
   </article>
 );
 
