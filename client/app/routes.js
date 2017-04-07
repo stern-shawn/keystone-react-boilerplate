@@ -13,7 +13,7 @@ const loadModule = (cb) => (componentModule) => {
 export default function createRoutes() {
   return [
     {
-      path: '/',
+      path: '/(page/:pageId)',
       name: 'home',
       getComponent(nextState, cb) {
         import('containers/HomePage')

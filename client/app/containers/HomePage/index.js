@@ -4,14 +4,14 @@
  * This is the first thing users see of our App, at the '/' route
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 
 // Components
 import LandingHeader from 'components/LandingHeader';
 import Blog from 'containers/Blog';
 
-const HomePage = () => (
+const HomePage = ({ routeParams }) => (
   <article>
     <Helmet
       title="Home Page"
@@ -22,9 +22,13 @@ const HomePage = () => (
         },
       ]}
     />
-    <LandingHeader />
+    <LandingHeader compact={routeParams.pageId !== undefined} />
     <Blog />
   </article>
 );
+
+HomePage.propTypes = {
+  routeParams: PropTypes.object.isRequired,
+};
 
 export default HomePage;
