@@ -53,16 +53,6 @@ export class Blog extends Component {
     }
   }
 
-  // componentDidUpdate() {
-  //   const {
-  //     loadSuccess,
-  //   } = this.props;
-  //
-  //   if (!loadSuccess) {
-  //     alert('Failed to get posts :(');
-  //   }
-  // }
-
   render() {
     const {
       currentPage,
