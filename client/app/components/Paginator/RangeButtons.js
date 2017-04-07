@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import classNames from 'classnames';
 
 // Styles
@@ -40,7 +41,7 @@ const RangeButtons = ({ currPage, numPages, getPosts }) => {
     return (
       <li key={idx}>
         {val !== '...' ?
-          <button className={buttonStyle} onClick={() => getPosts(val)}>{val}</button> :
+          <Link to={`/page/${val}`} className={buttonStyle} onClick={() => getPosts(val)}>{val}</Link> :
           <button className={buttonStyle}>{val}</button>}
       </li>
     );
