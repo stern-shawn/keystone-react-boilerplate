@@ -27,10 +27,16 @@ const getPageOfPostsEpic = (action$, store, { blogApi }) =>
   action$.ofType(GET_PAGINATED_POSTS)
     .switchMap((action) =>
       blogApi.fetchPageOfPosts(action.page)
-        .map((json) => setPaginatedPosts(json.posts))
+        .map((json) => {
+          console.dir(json);
+          if (json.posts.currentPage < 0 || json.posts.currentPage > json.posts.totalPages) {
+            throw new Error('Invalid Page Requested');
+          }
+          return setPaginatedPosts(json.posts);
+        })
         .catch((error) => Observable.of({
           type: GET_POSTS_FAILED,
-          payload: error.xhr.response,
+          payload: error,
           error: true,
         }))
     );
