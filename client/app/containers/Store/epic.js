@@ -9,7 +9,7 @@ import {
 
 const getAllStoreItemsEpic = (action$, store, { storeApi }) =>
   action$.ofType(GET_ALL_ITEMS)
-    .mergeMap(() =>
+    .switchMap(() =>
       storeApi.fetchItems()
         .map((json) => setItems(json.response))
         .catch((error) => Observable.of({
