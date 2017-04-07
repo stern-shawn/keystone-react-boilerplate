@@ -14,7 +14,7 @@ const closeNavEpic = (action$) =>
   action$.ofType(LOCATION_CHANGE)
     .switchMap((action) => {
       // If location change is to blog pages, parse out the page and fetch that data
-      if (action.payload.pathname.indexOf('/page/') > -1) {
+      if (/page\/\d+/.test(action.payload.pathname)) {
         const page = /page\/(\d+)/g.exec(action.payload.pathname);
         // We still want the closeDrawer effect, just in case user hits nav buttons
         // while in the menu. We can do multiple actions in a switchMap by returning
