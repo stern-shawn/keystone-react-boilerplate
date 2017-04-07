@@ -7,6 +7,7 @@ import {
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
   GET_POSTS_FAILED,
+  INVALID_PAGE_REQUEST,
   SET_PAGINATED_POSTS,
   SET_POST,
   SET_POSTS,
@@ -59,6 +60,19 @@ function getPostsFailed() {
 }
 
 /**
+ * Fallback method for if the user requested an invalid page
+ *
+ * @return {object}    An action object with a type of INVALID_POSTS_REQUEST
+ *
+ */
+function invalidPageRequest(failData) {
+  return {
+    type: INVALID_PAGE_REQUEST,
+    failData,
+  };
+}
+
+/**
  * Updates the currently page of posts and updates the store with page stats
  * such as which page is active and how many pages are in the DB
  *
@@ -106,6 +120,7 @@ export {
   getPageOfPosts,
   getPostBySlug,
   getPostsFailed,
+  invalidPageRequest,
   setPaginatedPosts,
   setPost,
   setPosts,

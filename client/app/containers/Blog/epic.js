@@ -6,6 +6,7 @@ import {
   GET_POSTS_FAILED,
 } from './constants';
 import {
+  invalidPageRequest,
   setPost,
   setPosts,
   setPaginatedPosts,
@@ -28,9 +29,8 @@ const getPageOfPostsEpic = (action$, store, { blogApi }) =>
     .switchMap((action) =>
       blogApi.fetchPageOfPosts(action.page)
         .map((json) => {
-          console.dir(json);
           if (json.posts.currentPage < 0 || json.posts.currentPage > json.posts.totalPages) {
-            throw new Error('Invalid Page Requested');
+            return invalidPageRequest(json.posts);
           }
           return setPaginatedPosts(json.posts);
         })

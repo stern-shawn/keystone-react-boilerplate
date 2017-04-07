@@ -8,6 +8,7 @@ import {
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
   GET_POSTS_FAILED,
+  INVALID_PAGE_REQUEST,
   SET_PAGINATED_POSTS,
   SET_POST,
   SET_POSTS,
@@ -42,11 +43,19 @@ function blogReducer(state = initialState, action) {
         .set('isLoading', true);
     case GET_POSTS_FAILED:
       console.log('Failed to get posts');
-      // More, actual behavior later...
       return state
         .set('isLoading', false)
         .set('posts', null)
         .set('loadSuccess', false);
+    case INVALID_PAGE_REQUEST:
+      console.log('User asked for out of range page');
+      // User requested an invalid page. Update flags, but also update maxPages
+      // so that Paginator can still render correct number of pages
+      return state
+        .set('isLoading', false)
+        .set('loadSuccess', false)
+        .set('maxPages', action.failData.totalPages)
+        .set('posts', null);
     case SET_PAGINATED_POSTS:
       console.log(`Posts from page ${action.paginatedData.currentPage} retrieved successfully, adding to store`);
       // Update the contents of the posts array and pagination data
