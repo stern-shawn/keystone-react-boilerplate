@@ -31,25 +31,29 @@ export class Blog extends Component {
       currentPage,
       onGetPost,
       onGetPosts,
+      posts,
       prefetchPage,
       routeParams,
     } = this.props;
 
-    // Load content based on if this container is being used to display
-    // all posts or a single post specified by the route pathing
-    if (routeParams) {
-      // Get and render the single post foxued by the user
-      console.log(`Retrieve blog post: ${routeParams.postSlug}`);
-      onGetPost(routeParams.postSlug);
-    } else if (prefetchPage) {
-      // Fetch requested page on load instead of defaulting to 1
-      console.log(`Page subroute, loading page ${prefetchPage}`);
-      onGetPosts(prefetchPage);
-    } else {
-      // On mount, fetch posts from the API to populate the redux store
-      // The template below will populate itself based on the store's contents
-      console.log('Blog mounted, loading all posts');
-      onGetPosts(currentPage);
+    // Only fetch if there are no posts, or requested page not already cached
+    if (posts === null || posts[currentPage] === undefined) {
+      // Load content based on if this container is being used to display
+      // all posts or a single post specified by the route pathing
+      if (routeParams) {
+        // Get and render the single post foxued by the user
+        console.log(`Retrieve blog post: ${routeParams.postSlug}`);
+        onGetPost(routeParams.postSlug);
+      } else if (prefetchPage) {
+        // Fetch requested page on load instead of defaulting to 1
+        console.log(`Page subroute, loading page ${prefetchPage}`);
+        onGetPosts(prefetchPage);
+      } else {
+        // On mount, fetch posts from the API to populate the redux store
+        // The template below will populate itself based on the store's contents
+        console.log('Blog mounted, loading all posts');
+        onGetPosts(currentPage);
+      }
     }
   }
 
