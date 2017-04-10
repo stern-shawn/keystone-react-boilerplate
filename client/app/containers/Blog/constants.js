@@ -2,6 +2,7 @@
  * Action Constants
  */
 
+export const CHANGE_PAGE = 'keystone/Blog/CHANGE_PAGE';
 export const GET_ALL_POSTS = 'keystone/Blog/GET_ALL_POSTS';
 export const GET_PAGINATED_POSTS = 'keystone/Blog/GET_PAGINATED_POSTS';
 export const GET_POST_BY_SLUG = 'keystone/Blog/GET_POST_BY_SLUG';

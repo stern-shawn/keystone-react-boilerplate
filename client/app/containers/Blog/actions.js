@@ -3,6 +3,7 @@
  */
 
 import {
+  CHANGE_PAGE,
   GET_ALL_POSTS,
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
@@ -12,6 +13,18 @@ import {
   SET_POST,
   SET_POSTS,
 } from './constants';
+
+/**
+ * Update focused page in the Blog
+ *
+ * @return {object}    An action object with a type of CHANGE_PAGE
+ */
+function changeToPage(page) {
+  return {
+    type: CHANGE_PAGE,
+    page,
+  };
+}
 
 /**
  * Submit a request for all posts
@@ -116,6 +129,7 @@ function setPosts(posts) {
 }
 
 export {
+  changeToPage,
   getAllPosts,
   getPageOfPosts,
   getPostBySlug,

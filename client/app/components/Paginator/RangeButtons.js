@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import bulma from 'styles/bulma.scss';
 
 // Given a range of pages, render the numeric buttons for accessing respective pages
-const RangeButtons = ({ currPage, numPages, getPosts }) => {
+const RangeButtons = ({ currPage, numPages }) => {
   const midPoint = Math.floor(numPages / 2);
 
   let pageRange;
@@ -41,7 +41,7 @@ const RangeButtons = ({ currPage, numPages, getPosts }) => {
     return (
       <li key={idx}>
         {val !== '...' ?
-          <Link to={`/page/${val}`} className={buttonStyle} onClick={() => getPosts(val)}>{val}</Link> :
+          <Link to={`/page/${val}`} className={buttonStyle}>{val}</Link> :
           <button className={buttonStyle}>{val}</button>}
       </li>
     );
@@ -57,7 +57,6 @@ const RangeButtons = ({ currPage, numPages, getPosts }) => {
 RangeButtons.propTypes = {
   currPage: PropTypes.number.isRequired,
   numPages: PropTypes.number.isRequired,
-  getPosts: PropTypes.func.isRequired,
 };
 
 export default RangeButtons;

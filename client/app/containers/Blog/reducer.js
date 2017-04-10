@@ -4,6 +4,7 @@
 import { fromJS } from 'immutable';
 
 import {
+  CHANGE_PAGE,
   GET_ALL_POSTS,
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
@@ -42,6 +43,9 @@ const appendPostsPage = (currPosts, latestPageNum, latestPage) => {
 
 function blogReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGE_PAGE:
+      return state
+        .set('currentPage', action.page);
     case GET_ALL_POSTS:
       console.log('Beginning action to get all posts');
       return state

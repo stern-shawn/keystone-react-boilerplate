@@ -60,7 +60,6 @@ export class Blog extends Component {
       loading,
       loadSuccess,
       maxPages,
-      onGetPosts,
       posts,
       routeParams,
     } = this.props;
@@ -92,7 +91,6 @@ export class Blog extends Component {
           ? <Paginator
             currPage={currentPage}
             numPages={maxPages}
-            getPosts={onGetPosts}
           />
           : null
         }

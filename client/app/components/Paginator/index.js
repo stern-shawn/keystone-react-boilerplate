@@ -9,12 +9,10 @@ import styles from './styles.scss';
 // Components
 import RangeButtons from './RangeButtons';
 
-const Paginator = ({ currPage, numPages, getPosts }) => {
+const Paginator = ({ currPage, numPages }) => {
   // Wrapper function to prevent out of range page requests
   const getPostsSafe = (e, target) => {
-    if (target > 0 && target <= numPages) {
-      getPosts(target);
-    } else {
+    if (!(target > 0 && target <= numPages)) {
       console.warn(`User attempted to request invalid page number: ${target}`);
       e.preventDefault();
     }
@@ -46,7 +44,7 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
       <Link to={`/page/${currPage + 1}`} className={nextStyle} onClick={(e) => getPostsSafe(e, currPage + 1)}>
         Next Page
       </Link>
-      <RangeButtons currPage={currPage} numPages={numPages} getPosts={getPosts} />
+      <RangeButtons currPage={currPage} numPages={numPages} getPosts={getPostsSafe} />
     </nav>
   );
 };
@@ -54,7 +52,6 @@ const Paginator = ({ currPage, numPages, getPosts }) => {
 Paginator.propTypes = {
   currPage: PropTypes.number,
   numPages: PropTypes.number,
-  getPosts: PropTypes.func,
 };
 
 export default Paginator;
