@@ -40,6 +40,7 @@ export class Blog extends Component {
     // Only fetch if there are no posts, or requested page not already cached
     // Similarly, don't reload if the focusedPost is already loaded
     if ((routeParams && focusedPost && routeParams.postSlug !== focusedPost.post.slug)
+        || (routeParams && focusedPost === null)
         || posts === null
         || posts[currentPage] === undefined) {
       // Load content based on if this container is being used to display
