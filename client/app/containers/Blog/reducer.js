@@ -27,6 +27,19 @@ const initialState = fromJS({
 // Show posts in newest first order
 // const makeChronological = (posts) => posts.reverse();
 
+const appendPostsPage = (currPosts, latestPageNum, latestPage) => {
+  // Inject a new page object at the given page key
+  // Use spread operator instead of Object.assign for brownie points
+  console.dir(currPosts);
+  console.dir(latestPage);
+  const newPosts = {
+    ...currPosts,
+    [latestPageNum]: latestPage,
+  };
+
+  return newPosts;
+};
+
 function blogReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_POSTS:
@@ -60,7 +73,7 @@ function blogReducer(state = initialState, action) {
       console.log(`Posts from page ${action.paginatedData.currentPage} retrieved successfully, adding to store`);
       // Update the contents of the posts array and pagination data
       return state
-        .set('posts', action.paginatedData.results)
+        .set('posts', appendPostsPage(state.get('posts'), action.paginatedData.currentPage, action.paginatedData.results))
         .set('currentPage', action.paginatedData.currentPage)
         .set('maxPages', action.paginatedData.totalPages)
         .set('isLoading', false)

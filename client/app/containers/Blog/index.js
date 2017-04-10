@@ -74,7 +74,8 @@ export class Blog extends Component {
     // Display a single blog post or a list of previews depending on location in the app
     const BlogContainerContent = routeParams ?
       focusedPost && <BlogPost postData={focusedPost} /> :
-      posts && <BlogPreviewList posts={posts} />;
+      // Update posts={posts} -> posts{posts[currentPage]} to still send an array from the object
+      posts && <BlogPreviewList posts={posts[currentPage]} />;
 
     return (
       <section id="content" className={bulma.container}>
@@ -108,10 +109,7 @@ Blog.propTypes = {
   maxPages: PropTypes.number,
   onGetPost: PropTypes.func,
   onGetPosts: PropTypes.func,
-  posts: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]),
+  posts: PropTypes.object,
   prefetchPage: PropTypes.number,
   routeParams: PropTypes.object,
 };

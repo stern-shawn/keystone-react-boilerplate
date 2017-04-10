@@ -20,7 +20,7 @@ const BlogPreviewList = ({ posts }) => {
 };
 
 BlogPreviewList.propTypes = {
-  posts: PropTypes.array,
+  posts: PropTypes.array.isRequired,
 };
 
 export default BlogPreviewList;
