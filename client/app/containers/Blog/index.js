@@ -29,6 +29,7 @@ export class Blog extends Component {
   componentDidMount() {
     const {
       currentPage,
+      focusedPost,
       onGetPost,
       onGetPosts,
       posts,
@@ -37,7 +38,10 @@ export class Blog extends Component {
     } = this.props;
 
     // Only fetch if there are no posts, or requested page not already cached
-    if (posts === null || posts[currentPage] === undefined) {
+    // Similarly, don't reload if the focusedPost is already loaded
+    if ((routeParams && focusedPost && routeParams.postSlug !== focusedPost.post.slug)
+        || posts === null
+        || posts[currentPage] === undefined) {
       // Load content based on if this container is being used to display
       // all posts or a single post specified by the route pathing
       if (routeParams) {
