@@ -5,7 +5,7 @@ import { fromJS } from 'immutable';
 
 import {
   CHANGE_PAGE,
-  GET_ALL_POSTS,
+  // GET_ALL_POSTS,
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
   GET_POSTS_FAILED,
@@ -37,10 +37,10 @@ function blogReducer(state = initialState, action) {
     case CHANGE_PAGE:
       return state
         .set('currentPage', action.page);
-    case GET_ALL_POSTS:
-      console.log('Beginning action to get all posts');
-      return state
-        .set('isLoading', true);
+    // case GET_ALL_POSTS:
+    //   console.log('Beginning action to get all posts');
+    //   return state
+    //     .set('isLoading', true);
     case GET_PAGINATED_POSTS:
       console.log('Beginning action to get page of posts');
       return state

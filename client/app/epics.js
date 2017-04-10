@@ -7,7 +7,7 @@ import {
   fetchPageEpic,
 } from 'containers/App/epic';
 import {
-  getAllBlogPostsEpic,
+  // getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
 } from 'containers/Blog/epic';
@@ -22,7 +22,7 @@ const rootEpic = (...args) => combineEpics(
   closeNavEpic,
   fetchPageEpic,
   getAboutPageEpic,
-  getAllBlogPostsEpic,
+  // getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
   getAllStoreItemsEpic,
