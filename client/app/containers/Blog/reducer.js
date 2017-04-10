@@ -25,21 +25,12 @@ const initialState = fromJS({
   loadSuccess: true,
 });
 
-// Show posts in newest first order
-// const makeChronological = (posts) => posts.reverse();
-
-const appendPostsPage = (currPosts, latestPageNum, latestPage) => {
-  // Inject a new page object at the given page key
-  // Use spread operator instead of Object.assign for brownie points
-  console.dir(currPosts);
-  console.dir(latestPage);
-  const newPosts = {
-    ...currPosts,
-    [latestPageNum]: latestPage,
-  };
-
-  return newPosts;
-};
+// Inject a new page object at the given page key
+// Use spread operator instead of Object.assign for brownie points
+const appendPostsPage = (currPosts, latestPageNum, latestPage) => ({
+  ...currPosts,
+  [latestPageNum]: latestPage,
+});
 
 function blogReducer(state = initialState, action) {
   switch (action.type) {

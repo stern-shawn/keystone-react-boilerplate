@@ -23,8 +23,6 @@ const closeNavEpic = (action$, store) =>
         // Adding a null check since cachedPosts will be null if they navigated
         // to an invalid page on initial navigation and we can't access [page] of null...
         if (cachedPosts !== null && cachedPosts[page] !== undefined) {
-          console.log(`Page ${page} already loaded!`);
-          console.log(cachedPosts[page]);
           return Observable.of(
             changeToPage(page),
             closeDrawer()
