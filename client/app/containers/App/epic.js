@@ -9,9 +9,20 @@ import {
 } from '../Blog/actions';
 
 // Automatically close the nav drawer when the user has selected a new route
-// TODO: Filter this so it only catches when the drawer is active, currently
-// is a brute force, always fire action...
 const closeNavEpic = (action$, store) =>
+  action$.ofType(LOCATION_CHANGE)
+    .switchMap(() => {
+      const drawerActive = store.getState().getIn(['global', 'drawerActive']);
+      if (drawerActive) {
+        return Observable.of(closeDrawer());
+      }
+      return Observable.of();
+    });
+
+// Intelligently use state to determine if we need to fetch the requested page,
+// or can simply use cached content. Also provides support for if we change pages
+// using react-router navigation instead of actions.
+const fetchPageEpic = (action$, store) =>
   action$.ofType(LOCATION_CHANGE)
     .switchMap((action) => {
       // If location change is to blog pages, parse out the page and fetch that data
@@ -23,23 +34,15 @@ const closeNavEpic = (action$, store) =>
         // Adding a null check since cachedPosts will be null if they navigated
         // to an invalid page on initial navigation and we can't access [page] of null...
         if (cachedPosts !== null && cachedPosts[page] !== undefined) {
-          return Observable.of(
-            changeToPage(page),
-            closeDrawer()
-          );
+          return Observable.of(changeToPage(page));
         }
         // If the posts aren't already cached, fetch from back-end
-        // We can do multiple actions in a switchMap by returning
-        // an array of Observables, where each Observable wraps an action
-        return Observable.of(
-          getPageOfPosts(page),
-          closeDrawer()
-        );
+        return Observable.of(getPageOfPosts(page));
       }
-      // Otherwise, just close nav drawer, just in case
-      return Observable.of(closeDrawer());
+      return Observable.of();
     });
 
 export {
   closeNavEpic,
+  fetchPageEpic,
 };
