@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
 // Styles
 import styles from './styles.scss';
 
-const LandingHeader = () => {
+const LandingHeader = ({ compact }) => {
   // Scroll content area to top of viewport
   // Make an arrow function, free binding of this :D
   const scrollToContent = () => {
@@ -19,21 +20,30 @@ const LandingHeader = () => {
     this.contentArrow.blur();
   };
 
+  const contentStyle = classNames({
+    [styles.blogHeader]: true,
+    [styles.compact]: compact,
+  });
+
   return (
     <header>
-      <div className={styles.blogHeader}>
+      <div className={contentStyle}>
         <div className={styles.headerContent}>
           <h1>Hipster Blog Title</h1>
           <h2>Chillwave shabby chic retro glossier seitan pitchfork.</h2>
         </div>
-        <button
+        {!compact && <button
           ref={(button) => { this.contentArrow = button; }}
           className={styles.contentArrow}
           onClick={() => handleClick()}
-        />
+        />}
       </div>
     </header>
   );
+};
+
+LandingHeader.propTypes = {
+  compact: PropTypes.bool.isRequired,
 };
 
 export default LandingHeader;

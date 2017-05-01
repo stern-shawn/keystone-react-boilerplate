@@ -20,6 +20,22 @@ export default function createRoutes() {
           .then(loadModule(cb))
           .catch(errorLoading);
       },
+      childRoutes: [
+        {
+          path: 'page',
+          name: 'blogPagesRedirect',
+          onEnter: (nextState, replace) => replace('/page/1'),
+        },
+      ],
+    },
+    {
+      path: '/page(/:pageId)',
+      name: 'home',
+      getComponent(nextState, cb) {
+        import('containers/HomePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
     },
     {
       path: '/about',

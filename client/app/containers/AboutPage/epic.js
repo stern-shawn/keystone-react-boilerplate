@@ -14,7 +14,7 @@ const getAboutPageEpic = (action$, store, { aboutPageApi }) =>
         .map((json) => setAboutContent(json.content[0]))
         .catch((error) => Observable.of({
           type: GET_ABOUT_CONTENT_FAILED,
-          payload: error.xhr.response,
+          payload: error,
           error: true,
         }))
     );

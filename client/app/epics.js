@@ -4,9 +4,10 @@ import {
 } from 'containers/AboutPage/epic';
 import {
   closeNavEpic,
+  fetchPageEpic,
 } from 'containers/App/epic';
 import {
-  getAllBlogPostsEpic,
+  // getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
 } from 'containers/Blog/epic';
@@ -19,8 +20,9 @@ import * as storeApi from 'utils/storeApi';
 
 const rootEpic = (...args) => combineEpics(
   closeNavEpic,
+  fetchPageEpic,
   getAboutPageEpic,
-  getAllBlogPostsEpic,
+  // getAllBlogPostsEpic,
   getBlogPostBySlugEpic,
   getPageOfPostsEpic,
   getAllStoreItemsEpic,
