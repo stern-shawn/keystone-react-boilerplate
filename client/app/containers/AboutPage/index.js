@@ -35,14 +35,16 @@ class AboutPage extends Component { // eslint-disable-line react/prefer-stateles
       loading,
     } = this.props;
 
-    const aboutPageContent = content && (
+    const aboutPageContent = content ? (
       <div className={`${bulma.column} ${styles.dropCard}`}>
         <div className={bulma.card}>
-          <div className={bulma['card-image']}>
-            <figure className={`${bulma.image} ${bulma['is-16by9']}`}>
-              <img src={heroImage.url} alt={heroImage.public_id} />
-            </figure>
-          </div>
+          {heroImage ?
+            <div className={bulma['card-image']}>
+              <figure className={`${bulma.image} ${bulma['is-16by9']}`}>
+                <img src={heroImage.url} alt={heroImage.public_id} />
+              </figure>
+            </div>
+            : null}
           <header className={bulma['card-header']}>
             <p className={bulma['card-header-title']}>
               {title}
@@ -55,7 +57,7 @@ class AboutPage extends Component { // eslint-disable-line react/prefer-stateles
           </div>
         </div>
       </div>
-    );
+    ) : <div>Under construction</div>;
 
     return (
       <div className={`${bulma.container} ${styles.aboutContainer}`}>

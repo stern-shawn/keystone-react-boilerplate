@@ -5,6 +5,7 @@
 import {
   GET_ABOUT_CONTENT,
   GET_ABOUT_CONTENT_FAILED,
+  NO_ABOUT_CONTENT,
   SET_ABOUT_CONTENT,
 } from './constants';
 
@@ -31,6 +32,17 @@ function getAboutContentFailed() {
 }
 
 /**
+ * Fallback method for if the user hasn't defined an about page
+ *
+ * @return {object}    An action object with a type of NO_ABOUT_CONTENT
+ */
+function noAboutContent() {
+  return {
+    type: NO_ABOUT_CONTENT,
+  };
+}
+
+/**
  * Creates/Updates the currently cached about page content
  *
  * @param  {posts} content Content object for the about page
@@ -47,5 +59,6 @@ function setAboutContent(content) {
 export {
   getAboutContent,
   getAboutContentFailed,
+  noAboutContent,
   setAboutContent,
 };
