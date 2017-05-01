@@ -5,14 +5,12 @@ import { fromJS } from 'immutable';
 
 import {
   CHANGE_PAGE,
-  // GET_ALL_POSTS,
   GET_PAGINATED_POSTS,
   GET_POST_BY_SLUG,
   GET_POSTS_FAILED,
   INVALID_PAGE_REQUEST,
   SET_PAGINATED_POSTS,
   SET_POST,
-  SET_POSTS,
 } from './constants';
 
 // The initial state of the App
@@ -37,10 +35,6 @@ function blogReducer(state = initialState, action) {
     case CHANGE_PAGE:
       return state
         .set('currentPage', action.page);
-    // case GET_ALL_POSTS:
-    //   console.log('Beginning action to get all posts');
-    //   return state
-    //     .set('isLoading', true);
     case GET_PAGINATED_POSTS:
       console.log('Beginning action to get page of posts');
       return state
@@ -78,13 +72,6 @@ function blogReducer(state = initialState, action) {
       // Update the currently focused post object
       return state
         .set('focusedPost', action.post)
-        .set('isLoading', false)
-        .set('loadSuccess', true);
-    case SET_POSTS:
-      console.log('Posts retrieved successfully, adding to store');
-      // Update the contents of the posts array
-      return state
-        .set('posts', action.posts)
         .set('isLoading', false)
         .set('loadSuccess', true);
     default:

@@ -10,4 +10,3 @@ export const GET_POSTS_FAILED = 'keystone/Blog/GET_POSTS_FAILED';
 export const INVALID_PAGE_REQUEST = 'keystone/Blog/INVALID_PAGE_REQUEST';
 export const SET_PAGINATED_POSTS = 'keystone/Blog/SET_PAGINATED_POSTS';
 export const SET_POST = 'keystone/Blog/SET_POST';
-export const SET_POSTS = 'keystone/Blog/SET_POSTS';
