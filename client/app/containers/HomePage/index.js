@@ -11,7 +11,7 @@ import Helmet from 'react-helmet';
 import LandingHeader from 'components/LandingHeader';
 import Blog from 'containers/Blog';
 
-const HomePage = ({ routeParams }) => (
+const HomePage = ({ routeParams: { pageId } }) => (
   <article>
     <Helmet
       title="Home Page"
@@ -22,8 +22,8 @@ const HomePage = ({ routeParams }) => (
         },
       ]}
     />
-    <LandingHeader compact={routeParams.pageId !== undefined} />
-    <Blog prefetchPage={parseInt(routeParams.pageId, 10)} />
+    <LandingHeader compact={pageId !== undefined} />
+    <Blog prefetchPage={parseInt(pageId, 10)} />
   </article>
 );
 
