@@ -46,7 +46,7 @@ export class Blog extends Component {
       // Load content based on if this container is being used to display
       // all posts or a single post specified by the route pathing
       if (routeParams) {
-        // Get and render the single post foxued by the user
+        // Get and render the single post focused by the user
         console.log(`Retrieve blog post: ${routeParams.postSlug}`);
         onGetPost(routeParams.postSlug);
       } else {
