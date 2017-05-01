@@ -34,7 +34,7 @@ function aboutPageReducer(state = initialState, action) {
         .set('content', null)
         .set('loadSuccess', false);
     case NO_ABOUT_CONTENT:
-    console.log('User has not defined an about page');
+      console.log('User has not defined an about page');
       return state
         .set('loadSuccess', false);
     case SET_ABOUT_CONTENT:
