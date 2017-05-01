@@ -49,15 +49,12 @@ export class Blog extends Component {
         // Get and render the single post foxued by the user
         console.log(`Retrieve blog post: ${routeParams.postSlug}`);
         onGetPost(routeParams.postSlug);
-      } else if (prefetchPage) {
-        // Fetch requested page on load instead of defaulting to 1
-        console.log(`Page subroute, loading page ${prefetchPage}`);
-        onGetPosts(prefetchPage);
       } else {
         // On mount, fetch posts from the API to populate the redux store
+        // If a prefetchPage is defined, load that instead
         // The template below will populate itself based on the store's contents
-        console.log('Blog mounted, loading all posts');
-        onGetPosts(currentPage);
+        console.log(`Blog mounted, loading posts for page ${prefetchPage || currentPage}`);
+        onGetPosts(prefetchPage || currentPage);
       }
     }
   }
