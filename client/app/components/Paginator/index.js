@@ -21,7 +21,7 @@ const Paginator = ({ currPage, numPages }) => {
   const paginatorStyle = classNames(
     bulma.pagination,
     styles.paginator,
-    bulma['is-centered'],
+    bulma['is-right'],
     bulma['is-large']
   );
 

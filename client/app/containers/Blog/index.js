@@ -84,13 +84,20 @@ export class Blog extends Component {
 
     return (
       <section id="content" className={bulma.container}>
+        {!routeParams && loadSuccess
+          ? <Paginator
+            currPage={currentPage}
+            numPages={maxPages}
+          />
+          : null
+        }
         {loading
           ? <LoadingIndicator />
           : BlogContainerContent
         }
         {!loading && !loadSuccess &&
           <div className={errStyle}>
-            <h2>Invalid page requested or connection failed, <Link to={'/page/1'}>click here</Link> to start at the first page</h2>
+            <h2>Invalid page requested or connection failed, <Link to={'/page/1'}>click here</Link> to start at the first page or use the navigation options below!</h2>
           </div>
         }
         {!routeParams
