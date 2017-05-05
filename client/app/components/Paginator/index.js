@@ -10,14 +10,6 @@ import styles from './styles.scss';
 import RangeButtons from './RangeButtons';
 
 const Paginator = ({ currPage, numPages }) => {
-  // Wrapper function to prevent out of range page requests
-  const getPostsSafe = (e, target) => {
-    if (!(target > 0 && target <= numPages)) {
-      console.warn(`User attempted to request invalid page number: ${target}`);
-      e.preventDefault();
-    }
-  };
-
   const paginatorStyle = classNames(
     bulma.pagination,
     styles.paginator,
@@ -38,13 +30,15 @@ const Paginator = ({ currPage, numPages }) => {
 
   return (
     <nav className={paginatorStyle}>
-      <Link to={`/page/${currPage - 1}`} className={prevStyle} onClick={(e) => getPostsSafe(e, currPage - 1)}>
-        Previous
-      </Link>
-      <Link to={`/page/${currPage + 1}`} className={nextStyle} onClick={(e) => getPostsSafe(e, currPage + 1)}>
-        Next Page
-      </Link>
-      <RangeButtons currPage={currPage} numPages={numPages} getPosts={getPostsSafe} />
+      {currPage > 1
+        ? <Link to={`/page/${currPage - 1}`} className={prevStyle}>Previous</Link>
+        : <Link to={`/page/${currPage}`} className={prevStyle} onClick={(e) => e.preventDefault()}>Previous</Link>
+      }
+      {currPage < numPages
+        ? <Link to={`/page/${currPage + 1}`} className={nextStyle}>Next</Link>
+        : <Link to={`/page/${currPage}`} className={nextStyle} onClick={(e) => e.preventDefault()}>Next</Link>
+      }
+      <RangeButtons currPage={currPage} numPages={numPages} />
     </nav>
   );
 };
