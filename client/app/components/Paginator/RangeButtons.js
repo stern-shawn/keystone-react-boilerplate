@@ -11,7 +11,7 @@ const RangeButtons = ({ currPage, numPages }) => {
 
   let pageRange;
   switch (true) {
-    case numPages <= 6:
+    case numPages < 10:
       // Build up an array of the page indicies from 1...numPages for our li's
       pageRange = Array(numPages).fill(0).map((e, i) => i + 1);
       break;
