@@ -1,17 +1,21 @@
 .enter {
   opacity: 0.01;
-  transition: opacity 250ms ease-in;
+  transform: translateY(-10px);
+  transition: all 250ms ease;
 
   &.enterActive {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .appear {
   opacity: 0.01;
-  transition: opacity 250ms ease-in;
+  transform: translateY(-10px);
+  transition: all 250ms ease;
 
   &.appearActive {
     opacity: 1;
+    transform: translateY(0);
   }
 }
