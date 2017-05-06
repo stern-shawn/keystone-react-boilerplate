@@ -7,7 +7,7 @@ import styles from './styles.scss';
 // Given an array of posts, produce a BlogCard of each
 const BlogPreviewList = ({ posts }) => {
   const postList = posts.map((post, index) => (
-    <li key={index} className={styles.dropCard}>
+    <li key={index}>
       <BlogCard post={post} />
     </li>
   ));

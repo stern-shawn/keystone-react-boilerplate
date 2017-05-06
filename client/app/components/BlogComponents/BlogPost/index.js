@@ -24,7 +24,7 @@ const BlogPost = ({ postData }) => {
   const date = getDate(post.publishedDate);
 
   return (
-    <section className={`${styles.postArea} ${styles.dropCard} ${bulma.content}`}>
+    <section className={`${styles.postArea} ${bulma.content}`}>
       <Helmet
         title={`${metaData.metaTitle} - Blog`}
         meta={metaData.metaTags}
