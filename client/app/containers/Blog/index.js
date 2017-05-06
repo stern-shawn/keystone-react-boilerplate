@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,6 +12,7 @@ import Paginator from 'components/Paginator';
 
 import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
+import transitions from './transitions.scss';
 
 import {
   getPostBySlug,
@@ -78,9 +80,9 @@ export class Blog extends Component {
 
     // Display a single blog post or a list of previews depending on location in the app
     const BlogContainerContent = routeParams ?
-      focusedPost && <BlogPost postData={focusedPost} /> :
+      focusedPost && <BlogPost key={focusedPost.fullPostUrl} postData={focusedPost} /> :
       // Update posts={posts} -> posts{posts[currentPage]} to still send an array from the object
-      posts && <BlogPreviewList posts={posts[currentPage]} />;
+      posts && <BlogPreviewList key={currentPage} posts={posts[currentPage]} />;
 
     return (
       <section id="content" className={bulma.container}>
@@ -91,10 +93,18 @@ export class Blog extends Component {
           />
           : null
         }
-        {loading
-          ? <LoadingIndicator />
-          : BlogContainerContent
-        }
+        <ReactCSSTransitionGroup
+          transitionName={transitions}
+          transitionAppear
+          transitionAppearTimeout={250}
+          transitionEnterTimeout={250}
+          transitionLeaveTimeout={250}
+        >
+          {loading
+            ? <LoadingIndicator key="loadingIndicator" />
+            : BlogContainerContent
+          }
+        </ReactCSSTransitionGroup>
         {!loading && !loadSuccess &&
           <div className={errStyle}>
             <h2>Invalid page requested or connection failed, <Link to={'/page/1'}>click here</Link> to start at the first page or use the navigation options below!</h2>
