@@ -96,9 +96,9 @@ export class Blog extends Component {
         <ReactCSSTransitionGroup
           transitionName={transitions}
           transitionAppear
+          transitionLeave={false}
           transitionAppearTimeout={250}
           transitionEnterTimeout={250}
-          transitionLeaveTimeout={250}
         >
           {loading
             ? <LoadingIndicator key="loadingIndicator" />
