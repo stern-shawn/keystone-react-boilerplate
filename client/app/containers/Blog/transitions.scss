@@ -7,15 +7,6 @@
   }
 }
 
-.leave {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
-
-  &.leaveActive {
-    opacity: 0.01;
-  }
-}
-
 .appear {
   opacity: 0.01;
   transition: opacity 250ms ease-in;
