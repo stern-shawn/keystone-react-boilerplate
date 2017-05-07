@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -93,7 +93,7 @@ export class Blog extends Component {
           />
           : null
         }
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName={transitions}
           transitionAppear
           transitionLeave={false}
@@ -104,7 +104,7 @@ export class Blog extends Component {
             ? <LoadingIndicator key="loadingIndicator" />
             : BlogContainerContent
           }
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
         {!loading && !loadSuccess &&
           <div className={errStyle}>
             <h2>Invalid page requested or connection failed, <Link to={'/page/1'}>click here</Link> to start at the first page or use the navigation options below!</h2>
