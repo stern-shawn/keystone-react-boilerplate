@@ -8,6 +8,7 @@
 
 // Package Imports
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
@@ -70,9 +71,9 @@ export const App = ({ children, drawerActive, onToggleDrawer }) => (
 );
 
 App.propTypes = {
-  children: React.PropTypes.node,
-  drawerActive: React.PropTypes.bool,
-  onToggleDrawer: React.PropTypes.func,
+  children: PropTypes.node,
+  drawerActive: PropTypes.bool,
+  onToggleDrawer: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

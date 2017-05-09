@@ -1,5 +1,6 @@
 // Element for displaying blog previews
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BlogCard from 'components/BlogComponents/BlogCard';
 
 import styles from './styles.scss';

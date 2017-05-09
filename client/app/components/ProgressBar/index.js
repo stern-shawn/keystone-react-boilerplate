@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProgressBar from './ProgressBar';
 
 function withProgressBar(WrappedComponent) {
-  class AppWithProgressBar extends React.Component {
+  class AppWithProgressBar extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -56,8 +57,8 @@ function withProgressBar(WrappedComponent) {
   }
 
   AppWithProgressBar.propTypes = {
-    location: React.PropTypes.object,
-    router: React.PropTypes.object,
+    location: PropTypes.object,
+    router: PropTypes.object,
   };
 
   return AppWithProgressBar;
