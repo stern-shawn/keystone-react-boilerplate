@@ -1,7 +1,8 @@
 // react-toolbox Button component enhanced to work with react-router-redux's
 // push() functionality since react-toolbox doesn't support router by default
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-toolbox/lib/button';
 import { Link } from 'react-router';
 

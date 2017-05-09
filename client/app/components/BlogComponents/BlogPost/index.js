@@ -1,5 +1,6 @@
 // Element for displaying blog previews
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { createMetaData, getDate } from 'utils/blogUtils';

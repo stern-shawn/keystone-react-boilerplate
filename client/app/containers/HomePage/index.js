@@ -4,7 +4,8 @@
  * This is the first thing users see of our App, at the '/' route
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 // Components
