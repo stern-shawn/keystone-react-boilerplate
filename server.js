@@ -14,7 +14,7 @@ keystone.init({
   'view engine': 'pug',
 
   'auto update': true,
-  'mongo': 'mongodb://localhost/my-project',
+  'mongo': process.env.MONGODB_REMOTE || 'mongodb://localhost/my-project',
   'cloudinary config':  process.env.CLOUDINARY_URL || {
     cloud_name: 'my-cloud',
     api_key   : 'abc',
