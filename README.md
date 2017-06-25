@@ -1,8 +1,39 @@
-# Keystone 4 Beta CMS/Backend + React-Redux Frontend experiment
----
+# ForkLift Js  
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/stern-shawn/keystone-react-boilerplate.svg)](https://greenkeeper.io/)
+A CMS scaffold with enterprise level scalability. Feel free to contribute and shoot PRs, this project will always remain open-source. 
 
-Description and roadmap, soon™. Currently under active development, but it's getting there!
+#### Dependencies
 
-:shipit:
+In order to run the scaffold, [MongoDB](./docs/mongoDB.md) needs to be installed and running.
+
+### Installation
+
+#### Client App
+
+Go to the client folder, install dependencies, and build files for serving
+
+```Shell
+cd keystone_client_boilerplate/client
+yarn
+yarn build
+```
+
+#### Keystone/Backend
+
+Go back one level to the main project folder, install dependencies, and run Node/Express server
+
+```Shell
+cd .. (if still in /keystone_client_boilerplate)
+yarn
+yarn start
+```
+
+
+
+
+
+
+### 
+
+ 
+
