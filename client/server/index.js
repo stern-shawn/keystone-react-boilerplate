@@ -1,5 +1,4 @@
 /* eslint consistent-return:0 */
-
 const express = require('express');
 const logger = require('./logger');
 

@@ -1,5 +1,5 @@
 import { ajax } from 'rxjs/observable/dom/ajax';
-const config = require('../config.json');
+const config = require('../../../env.json');
 
 // Bring in authorization details specific to this account
 const accessToken = config.SQUARE_ACCESS_TOKEN;

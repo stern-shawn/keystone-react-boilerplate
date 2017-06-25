@@ -1,5 +1,4 @@
-// Enables setting environment variables based on local .env file
-require('dotenv').config();
+const config = require('./env.json');
 
 var keystone = require('keystone');
 
@@ -14,8 +13,8 @@ keystone.init({
   'view engine': 'pug',
 
   'auto update': true,
-  'mongo': process.env.MONGODB_REMOTE || 'mongodb://localhost/my-project',
-  'cloudinary config':  process.env.CLOUDINARY_URL || {
+  'mongo': config.MONGODB_REMOTE || 'mongodb://localhost/my-project',
+  'cloudinary config':  config.CLOUDINARY_URL || {
     cloud_name: 'my-cloud',
     api_key   : 'abc',
     api_secret: '123',
@@ -24,8 +23,8 @@ keystone.init({
   'session': true,
   'auth': true,
   'user model': 'User',
-  'cookie secret': process.env.COOKIE_SECRET || 'changeme',
-  'port': process.env.PORT || 3000,
+  'cookie secret': config.COOKIE_SECRET || 'changeme',
+  'port': config.PORT || 3000,
 });
 
 require('./models');

@@ -1,5 +1,0 @@
-{
-  "SQUARE_ACCESS_TOKEN": "your_access_token",
-  "SQUARE_LOCATION": "your_unique_store_id",
-  "SQUARE_STORE_URL_NAME": "unique identifier of your market url, from https://squareup.com/market/{your id here}/item/..."
-}
