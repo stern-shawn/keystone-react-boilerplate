@@ -20,7 +20,7 @@ sudo mongod
 Go to the client folder, install dependencies, and build files for serving
 
 ```Shell
-cd keystone_client_boilerplate
+cd keystone_client_boilerplate/client
 yarn
 yarn build
 ```
