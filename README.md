@@ -13,7 +13,7 @@ In order to run the scaffold, [MongoDB](./docs/mongoDB.md) needs to be installed
 Go to the client folder, install dependencies, and build files for serving
 
 ```Shell
-cd keystone_client_boilerplate/client
+cd keystone-client-boilerplate/client
 yarn
 yarn build
 ```
