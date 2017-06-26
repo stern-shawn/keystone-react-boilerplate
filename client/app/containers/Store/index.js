@@ -9,7 +9,7 @@ import bulma from 'styles/bulma.scss';
 import styles from './styles.scss';
 import { getAllItems } from './actions';
 import { makeSelectItems, makeSelectLoading } from './selectors';
-const config = require('config.json');
+const config = require('../../../../env.json');
 
 export class Store extends Component {
   componentDidMount() {

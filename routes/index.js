@@ -62,6 +62,12 @@ exports = module.exports = function(app) {
     routes.api.posts.getSlug
   );
 
+  // Handle requests to Square on the server to avoid exposing credentials/tokens
+  app.get(
+    '/api/store/items',
+    routes.api.store.storeItems
+  );
+
   // Serve the front-end SPA for non-API requests
   app.get('*', routes.views.index);
 }
